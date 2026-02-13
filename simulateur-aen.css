@@ -29,7 +29,7 @@
   --shadow-lg: 0 4px 12px rgba(19,27,29,0.06), 0 12px 32px rgba(19,27,29,0.08);
 }
 /* ── Aggressive Webflow reset ── */
-.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important;min-height:0!important;min-width:0!important;max-height:none!important;float:none!important;clear:none!important;flex:initial!important;align-self:auto!important;overflow:visible}
+.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important;min-height:0!important;min-width:0!important;max-height:none;float:none!important;clear:none!important;flex:initial;align-self:auto!important;overflow:visible}
 .sim{
   max-width:820px!important;margin:0 auto!important;padding:40px 20px 80px!important;
   font-family:'Inter',sans-serif!important;
@@ -416,7 +416,7 @@
 .sim .dc-sep{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-3);padding:10px 0 4px}
 .sim .dr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:13px}
 .sim .dr+.dr{border-top:1px solid var(--border-light)}
-.sim .dr .dl{color:var(--text-2)}.dr .dv{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--text)}
+.sim .dr .dl{color:var(--text-2)}.sim .dr .dv{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--text)}
 .sim .dc-total{border-top:2px solid var(--border);margin-top:6px;padding-top:10px;display:flex;justify-content:space-between;align-items:center}
 .sim .dc-total .dl{font-weight:700;color:var(--text);font-size:13px}
 .sim .dc-total .dv{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700}
@@ -470,7 +470,7 @@
 .sim .em-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--success);margin-bottom:10px}
 .sim .em-row{display:flex;justify-content:space-between;padding:5px 0;font-size:12.5px}
 .sim .em-row+.em-row{border-top:1px solid var(--border-light)}
-.sim .em-row .el{color:var(--text-2)}.em-row .ev{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500}
+.sim .em-row .el{color:var(--text-2)}.sim .em-row .ev{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500}
 .sim .em-total{border-top:2px solid var(--border);margin-top:4px;padding-top:8px;display:flex;justify-content:space-between}
 .sim .em-total .el{font-weight:700;color:var(--text);font-size:12.5px}
 .sim .em-total .ev{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--success)}
@@ -516,9 +516,9 @@
 .sim .fiscal-toggle svg.chevron{width:18px;height:18px;color:var(--text-3);transition:transform 0.3s}
 .sim .fiscal-toggle.open svg.chevron{transform:rotate(180deg)}
 .sim .fiscal-content{
-  max-height:0;overflow:hidden;transition:max-height 0.35s ease;
+  max-height:0!important;overflow:hidden!important;transition:max-height 0.35s ease;
 }
-.sim .fiscal-content.open{max-height:300px}
+.sim .fiscal-content.open{max-height:300px!important;overflow:hidden!important}
 
 /* ── Utilities ── */
 .sim .card-body-compact{padding:16px 20px!important}
