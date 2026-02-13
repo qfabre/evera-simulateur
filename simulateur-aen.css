@@ -75,7 +75,7 @@
 }
 .sim .sec-title .st-ico{display:flex;align-items:center;flex-shrink:0;color:var(--bleu-fonce)}
 .sim .sec-title .st-ico svg{width:18px;height:18px}
-.sim .ico{width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:16;display:inline-block}
+.sim .ico{width:18px;height:18px;vertical-align:-0.125em;fill:none;stroke:currentColor;display:inline-block;flex-shrink:0}
 
 /* ── Motorisation selector ── */
 .sim .moto-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin-bottom:8px!important}
@@ -112,7 +112,7 @@
 
 /* ── Toggle row ── */
 .sim .toggle-row{display:flex!important;
-  display:flex;align-items:center;justify-content:space-between;
+  align-items:center;justify-content:space-between;
   padding:14px 16px;background:var(--surface-alt);border-radius:var(--radius-sm);
   margin-bottom:8px;
 }
@@ -216,7 +216,7 @@
 .sim .frais-summary .fs-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
 
 /* ── Fleet presets ── */
-.sim .fleet-presets{display:flex!important!important;align-items:center;gap:6px}
+.sim .fleet-presets{display:flex!important;align-items:center;gap:6px}
 .sim .fp{
   height:34px;min-width:42px;padding:0 10px;
   border:1.5px solid var(--border);border-radius:100px;background:var(--surface);
@@ -233,7 +233,7 @@
 /* ── CTA ── */
 .sim .cta-wrap{margin:28px 0 12px}
 .sim .btn-calc{display:flex!important;
-  width:100%;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;height:52px;align-items:center;justify-content:center;gap:8px;
   background:var(--noir);color:var(--blanc);border:none;border-radius:100px;
   font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
   cursor:pointer;transition:all 0.2s;
@@ -345,11 +345,6 @@
 
 .sim .modal-legal{font-size:10.5px;color:var(--text-3);text-align:center;margin-top:10px;line-height:1.5}
 .sim .modal-legal a{color:var(--success);text-decoration:underline;text-underline-offset:2px}
-
-  display:block;text-align:center;margin-top:8px;font-size:11px;
-  color:var(--text-3);cursor:pointer;background:none;border:none;
-  font-family:'Inter',sans-serif;text-decoration:underline;text-underline-offset:2px;
-}
 .sim .modal-close{
   position:absolute;top:12px;right:12px;width:28px;height:28px;
   border-radius:50%;border:none;background:rgba(0,0,0,0.06);
@@ -435,7 +430,7 @@
 .sim .fc-text{flex:1;min-width:240px}
 .sim .fc-text-title{font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;color:var(--noir);margin-bottom:4px}
 .sim .fc-text-desc{font-size:13px;color:var(--bleu-fonce);line-height:1.5}
-.sim .sim .fc-btns{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.sim .fc-btns{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
 .sim .btn-fleet-main{
   display:inline-flex;align-items:center;gap:8px;
   height:44px;padding:0 24px;background:var(--success);color:var(--blanc);
@@ -525,4 +520,24 @@
 }
 .sim .fiscal-content.open{max-height:300px}
 
-.sim-foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:28px;line-height:1.6}
+/* ── Utilities ── */
+.sim .card-body-compact{padding:16px 20px!important}
+.sim .ico-toggle{width:16px;height:16px;vertical-align:-3px;margin-right:4px;color:var(--bleu-fonce)}
+.sim .ico-lg{width:20px!important;height:20px!important}
+.sim .ico-sm{width:16px!important;height:16px!important}
+.sim .ico-xs{width:14px!important;height:14px!important}
+.sim .mb-14{margin-bottom:14px!important}
+.sim .mb-12{margin-bottom:12px!important}
+.sim .mt-8{margin-top:8px!important}
+.sim .mt-12{margin-top:12px!important}
+.sim .mt-16{margin-top:16px!important}
+.sim .mt-18{margin-top:18px!important}
+.sim .spacer-10{height:10px!important;min-height:10px!important}
+.sim .color-perso{color:#D97706!important}
+.sim .color-success{color:#2DA06B!important}
+.sim .no-decoration{text-decoration:none!important}
+.sim .fleet-input-wrap{width:72px}
+.sim .fleet-input{text-align:center;padding:6px 8px!important;font-size:13px}
+.sim .btn-fleet-main[data-bg="noir"]{background:var(--noir)!important}
+
+.sim .sim-foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:28px;line-height:1.6}
