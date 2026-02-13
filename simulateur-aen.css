@@ -263,9 +263,9 @@
 
 /* Left panel — green value prop */
 .sim .modal-left{
-  background:linear-gradient(170deg, #1B7A4A 0%, #167040 50%, #125A34 100%);
-  padding:36px 28px;color:var(--blanc);
-  display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;
+  background:linear-gradient(170deg, #1B7A4A 0%, #167040 50%, #125A34 100%)!important;
+  padding:36px 28px!important;color:var(--blanc)!important;
+  display:flex!important;flex-direction:column!important;justify-content:center!important;position:relative!important;overflow:hidden!important;
 }
 .sim .modal-left::before{
   content:'';position:absolute;top:-40%;right:-40%;width:300px;height:300px;
@@ -298,9 +298,9 @@
 .sim .ml-features{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;position:relative}
 .sim .ml-feat{display:flex;align-items:flex-start;gap:12px}
 .sim .ml-feat-icon{
-  width:30px;height:30px;min-width:30px;border-radius:7px;
-  background:rgba(255,255,255,0.12);
-  display:flex;align-items:center;justify-content:center;
+  width:30px!important;height:30px!important;min-width:30px!important;border-radius:7px!important;
+  background:rgba(255,255,255,0.15)!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
 }
 .sim .ml-feat-icon .ico{width:16px;height:16px;color:var(--blanc)}
 .sim .ml-feat-text{font-size:14px;line-height:1.45;opacity:0.92}
