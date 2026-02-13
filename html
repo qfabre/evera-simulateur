@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@7be37cc59b5d56e4cd4135b1241a6f43a931ba16/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@d73a7fd15da227ffb763d11f8a27fc597bead02a/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
@@ -283,7 +283,7 @@
       <div class="rh-over">RÉSULTAT DE VOTRE SIMULATION</div>
       <div class="rh-heading">En passant au réel, économisez <em id="heroSav">—</em><span id="heroFlotteLabel"> par an</span></div>
       <div class="rh-sub">Le calcul au réel, basé sur le suivi précis des km pro/perso, réduit l'avantage en nature déclaré.</div>
-      <div class="rh-fleet-total" id="heroFleetTotal"></div>
+      <span class="rh-fleet-total" id="heroFleetTotal"></span>
       <div class="rh-boxes">
         <div class="rh-box">
           <div class="rb-tag">Méthode actuelle</div>
@@ -303,6 +303,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Calc debug — visible only for @evera.co -->
+    <div class="calc-debug" id="calcDebug"></div>
 
     <div class="detail-grid">
       <section class="evc evc-np detail-card dc-base">
@@ -339,6 +342,13 @@
           <div class="dc-total"><span class="dl">Coût employeur</span><span class="dv v-success" id="r_r_te">—</span></div>
         </div>
       </section>
+    </div>
+
+    <!-- PDF download -->
+    <div style="text-align:center;margin-bottom:20px">
+      <button class="btn-fleet-outline" onclick="downloadPDF()" style="display:inline-flex !important">
+        <svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg> Télécharger le rapport PDF
+      </button>
     </div>
 
     <!-- Fleet CTA — clean horizontal bar -->
@@ -516,4 +526,5 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@7be37cc59b5d56e4cd4135b1241a6f43a931ba16/simulateur-aen.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@d73a7fd15da227ffb763d11f8a27fc597bead02a/simulateur-aen.js"></script>
