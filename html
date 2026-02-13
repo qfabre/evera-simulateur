@@ -1,9 +1,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@e6f7e372fae074f939411beb6f9f08c1566e9f45/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@b61305a71aaef38732bcc4780792702429e8391c/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
-.sim div{margin:0;padding:0;height:auto;min-height:0;max-width:none}
+.sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
 .sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
 .sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
 .sim div,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
@@ -426,7 +426,7 @@
       </button>
       <div class="table-content" id="fullTable">
         <table class="ftable"><thead><tr>
-          <th></th><th>Forfait</th><th class="color-success">Réel ✦</th><th>Forfait élec.</th><th>Réel élec.</th>
+          <th></th><th>Forfait</th><th style="color:#63768D">Réel ✦</th><th>Forfait élec.</th><th>Réel élec.</th>
         </tr></thead><tbody id="ftableBody"></tbody></table>
       </div>
     </div>
@@ -533,4 +533,4 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@e6f7e372fae074f939411beb6f9f08c1566e9f45/simulateur-aen.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@b61305a71aaef38732bcc4780792702429e8391c/simulateur-aen.js"></script>
