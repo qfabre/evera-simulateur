@@ -109,7 +109,7 @@
     </div>
   </section>
 
-  <!-- Données véhicule -->
+  <!-- Données véhicule + Frais annexes -->
   <section class="card" style="padding:24px 24px 20px !important">
     <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span> Données du véhicule</div>
 
@@ -129,55 +129,52 @@
     </div>
 
     <div class="grid g3">
-      <div>
+      <span style="display:block">
         <div class="label" id="loyerLabel"><svg class="ico" width="18" height="18"><use href="#ico-card"/></svg> Loyer annuel TTC <span class="tip" data-t="Loyer annuel TTC du véhicule (LLD ou crédit-bail)">?</span></div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="loyer" value="12000" min="0" step="100">
           <span class="unit">€ / an</span>
         </div>
-      </div>
-      <div>
+      </span>
+      <span style="display:block">
         <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg> Consommation</div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="conso" value="6" min="0" step="0.5">
           <span class="unit" id="consoUnit">L/100km</span>
         </div>
-      </div>
-      <div>
+      </span>
+      <span style="display:block">
         <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-euro"/></svg> Prix TTC carburant</div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="prix" value="1.70" min="0" step="0.05">
           <span class="unit" id="prixUnit">€ / L</span>
         </div>
-      </div>
+      </span>
     </div>
-  </section>
 
-  <!-- Frais annexes -->
-  <section class="card" style="padding:24px 24px 20px !important">
-    <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</div>
+    <div class="sec-title mt-18"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</div>
     <div class="grid g3">
-      <div>
+      <span style="display:block">
         <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="fraisAssurance" value="1000" min="0" step="50">
           <span class="unit">€ / an</span>
         </div>
-      </div>
-      <div>
+      </span>
+      <span style="display:block">
         <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="fraisEntretien" value="800" min="0" step="50">
           <span class="unit">€ / an</span>
         </div>
-      </div>
-      <div>
+      </span>
+      <span style="display:block">
         <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-circle"/></svg> Pneumatiques</div>
         <div class="input-wrap">
           <input type="number" class="input has-u" id="fraisPneus" value="400" min="0" step="50">
           <span class="unit">€ / an</span>
         </div>
-      </div>
+      </span>
     </div>
     <div class="frais-summary">
       <span class="fs-label">Total frais annexes</span>
@@ -237,7 +234,7 @@
   <div class="fiscal-content" id="fiscalContent">
     <section class="card mb-12" style="padding:24px 24px 20px !important">
       <div class="grid g3">
-        <div>
+        <span style="display:block">
           <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations salariales <span class="tip" data-t="Part salariale des cotisations sociales">?</span></div>
           <select class="select" id="tauxSal" onchange="updateFiscalHint()">
             <option value="18">18%</option>
@@ -246,8 +243,8 @@
             <option value="24">24%</option>
             <option value="25">25% (cadre)</option>
           </select>
-        </div>
-        <div>
+        </span>
+        <span style="display:block">
           <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations patronales <span class="tip" data-t="Part employeur des cotisations sociales">?</span></div>
           <select class="select" id="tauxPat" onchange="updateFiscalHint()">
             <option value="35">35%</option>
@@ -256,8 +253,8 @@
             <option value="45">45% (cadre)</option>
             <option value="48">48%</option>
           </select>
-        </div>
-        <div>
+        </span>
+        <span style="display:block">
           <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> Tranche marginale IR</div>
           <select class="select" id="tmi" onchange="updateFiscalHint()">
             <option value="0">0% — jusqu'à 11 294 €</option>
@@ -266,7 +263,7 @@
             <option value="41">41% — de 82 342 à 177 106 €</option>
             <option value="45">45% — au-delà de 177 106 €</option>
           </select>
-        </div>
+        </span>
       </div>
     </section>
   </div>
