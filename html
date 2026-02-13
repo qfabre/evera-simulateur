@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@548bafdc4170d72b62986b17c2c98c626056692c/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@067fa6469693085414f74ec0a1bb16799af71f2e/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
@@ -111,75 +111,75 @@
 
   <!-- Données véhicule + Frais annexes -->
   <section class="card" style="padding:24px 24px 20px !important">
-    <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span> Données du véhicule</div>
+    <h3 class="sec-title" style="display:flex !important;align-items:center !important;gap:8px !important;margin-bottom:20px !important"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span> Données du véhicule</h3>
 
-    <div class="mb-14">
-      <div class="label">Méthode d'acquisition</div>
-      <div class="acq-grid">
-        <div class="acq-opt active" data-acq="lld" onclick="setAcq(this)">
-          <div class="acq-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></div><div class="acq-name">LLD / LOA</div>
-        </div>
-        <div class="acq-opt" data-acq="credit" onclick="setAcq(this)">
-          <div class="acq-ico"><svg class="ico" width="18" height="18"><use href="#ico-bank"/></svg></div><div class="acq-name">Crédit-bail</div>
-        </div>
-        <div class="acq-opt" data-acq="achat" onclick="setAcq(this)">
-          <div class="acq-ico"><svg class="ico" width="18" height="18"><use href="#ico-key"/></svg></div><div class="acq-name">Achat</div>
-        </div>
-      </div>
-    </div>
+    <span style="display:block !important;margin-bottom:14px !important">
+      <label class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important">Méthode d'acquisition</label>
+      <span class="acq-grid" style="display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:8px !important">
+        <span class="acq-opt active" data-acq="lld" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span><span class="acq-name">LLD / LOA</span>
+        </span>
+        <span class="acq-opt" data-acq="credit" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-bank"/></svg></span><span class="acq-name">Crédit-bail</span>
+        </span>
+        <span class="acq-opt" data-acq="achat" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-key"/></svg></span><span class="acq-name">Achat</span>
+        </span>
+      </span>
+    </span>
 
-    <div class="grid g3">
-      <span style="display:block">
-        <div class="label" id="loyerLabel"><svg class="ico" width="18" height="18"><use href="#ico-card"/></svg> Loyer annuel TTC <span class="tip" data-t="Loyer annuel TTC du véhicule (LLD ou crédit-bail)">?</span></div>
-        <div class="input-wrap">
+    <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+      <label style="display:block !important">
+        <span class="label" id="loyerLabel" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-card"/></svg> Loyer annuel TTC <span class="tip" data-t="Loyer annuel TTC du véhicule (LLD ou crédit-bail)">?</span></span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="loyer" value="12000" min="0" step="100">
           <span class="unit">€ / an</span>
-        </div>
-      </span>
-      <span style="display:block">
-        <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg> Consommation</div>
-        <div class="input-wrap">
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg> Consommation</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="conso" value="6" min="0" step="0.5">
           <span class="unit" id="consoUnit">L/100km</span>
-        </div>
-      </span>
-      <span style="display:block">
-        <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-euro"/></svg> Prix TTC carburant</div>
-        <div class="input-wrap">
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-euro"/></svg> Prix TTC carburant</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="prix" value="1.70" min="0" step="0.05">
           <span class="unit" id="prixUnit">€ / L</span>
-        </div>
-      </span>
-    </div>
+        </span>
+      </label>
+    </span>
 
-    <div class="sec-title mt-18"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</div>
-    <div class="grid g3">
-      <span style="display:block">
-        <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</div>
-        <div class="input-wrap">
+    <h3 class="sec-title" style="display:flex !important;align-items:center !important;gap:8px !important;margin:18px 0 20px !important"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</h3>
+    <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="fraisAssurance" value="1000" min="0" step="50">
           <span class="unit">€ / an</span>
-        </div>
-      </span>
-      <span style="display:block">
-        <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</div>
-        <div class="input-wrap">
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="fraisEntretien" value="800" min="0" step="50">
           <span class="unit">€ / an</span>
-        </div>
-      </span>
-      <span style="display:block">
-        <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-circle"/></svg> Pneumatiques</div>
-        <div class="input-wrap">
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-circle"/></svg> Pneumatiques</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
           <input type="number" class="input has-u" id="fraisPneus" value="400" min="0" step="50">
           <span class="unit">€ / an</span>
-        </div>
-      </span>
-    </div>
-    <div class="frais-summary">
+        </span>
+      </label>
+    </span>
+    <span class="frais-summary" style="display:flex !important;align-items:center !important;justify-content:space-between !important;padding:12px 16px !important;background:#EDF5FA !important;border-radius:8px !important;margin-top:12px !important">
       <span class="fs-label">Total frais annexes</span>
       <span class="fs-value" id="fraisTotal">2 200 €/an</span>
-    </div>
+    </span>
   </section>
 
   <!-- Flotte — compact inline -->
@@ -233,9 +233,9 @@
   </button>
   <div class="fiscal-content" id="fiscalContent">
     <section class="card mb-12" style="padding:24px 24px 20px !important">
-      <div class="grid g3">
-        <span style="display:block">
-          <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations salariales <span class="tip" data-t="Part salariale des cotisations sociales">?</span></div>
+      <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations salariales <span class="tip" data-t="Part salariale des cotisations sociales">?</span></span>
           <select class="select" id="tauxSal" onchange="updateFiscalHint()">
             <option value="18">18%</option>
             <option value="20">20%</option>
@@ -243,9 +243,9 @@
             <option value="24">24%</option>
             <option value="25">25% (cadre)</option>
           </select>
-        </span>
-        <span style="display:block">
-          <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations patronales <span class="tip" data-t="Part employeur des cotisations sociales">?</span></div>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations patronales <span class="tip" data-t="Part employeur des cotisations sociales">?</span></span>
           <select class="select" id="tauxPat" onchange="updateFiscalHint()">
             <option value="35">35%</option>
             <option value="38">38%</option>
@@ -253,9 +253,9 @@
             <option value="45">45% (cadre)</option>
             <option value="48">48%</option>
           </select>
-        </span>
-        <span style="display:block">
-          <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> Tranche marginale IR</div>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> Tranche marginale IR</span>
           <select class="select" id="tmi" onchange="updateFiscalHint()">
             <option value="0">0% — jusqu'à 11 294 €</option>
             <option value="11">11% — de 11 295 à 28 797 €</option>
@@ -263,8 +263,8 @@
             <option value="41">41% — de 82 342 à 177 106 €</option>
             <option value="45">45% — au-delà de 177 106 €</option>
           </select>
-        </span>
-      </div>
+        </label>
+      </span>
     </section>
   </div>
 
@@ -514,4 +514,4 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@548bafdc4170d72b62986b17c2c98c626056692c/simulateur-aen.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@067fa6469693085414f74ec0a1bb16799af71f2e/simulateur-aen.js"></script>
