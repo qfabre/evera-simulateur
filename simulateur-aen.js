@@ -32,3 +32,5 @@ function updateFiscalHint(){document.querySelector('.ft-hint').textContent=`— 
 function toggleElec(){$('elecContent').classList.toggle('open');$('elecToggle').classList.toggle('open')}
 function toggleTable(){const c=$('fullTable'),t=$('tableToggle'),o=c.classList.toggle('open');t.classList.toggle('open',o);const sv='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg> ';t.innerHTML=o?sv+'Masquer le tableau':sv+'Tableau récapitulatif des 4 scénarios'}
 function newSim(){['results','elecContent','elecToggle','fullTable','tableToggle'].forEach(id=>$(id).classList.remove('visible','open'));window.scrollTo({top:0,behavior:'smooth'})}
+function fixPad(){qA('.sim .evc:not(.evc-sm):not(.evc-np)').forEach(el=>el.style.setProperty('padding','24px 24px 20px','important'));qA('.sim .evc-sm').forEach(el=>el.style.setProperty('padding','16px 20px','important'));qA('.sim .evc-np').forEach(el=>el.style.setProperty('padding','0','important'))}
+fixPad();window.addEventListener('load',fixPad);setTimeout(fixPad,1500);setTimeout(fixPad,4000);

@@ -60,17 +60,16 @@
 .sim a{color:inherit!important}
 .sim input,.sim select{font-family:inherit!important;font-size:inherit!important;margin:0!important}
 
-/* ── Card ── */
-.sim .card{
+/* ── Card (class=evc to avoid Webflow .card collision) ── */
+.sim .evc{
   background:var(--surface)!important;border:1px solid var(--border)!important;
   border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;
   margin-bottom:16px!important;overflow:hidden!important;
   padding:24px 24px 20px!important;height:auto!important;
 }
-.sim .card-compact{padding:16px 20px!important}
-.sim .card-nopad{padding:0!important}
-.sim .card-body{padding:24px 24px 20px!important}
-@media(max-width:600px){.sim .card{padding:18px 14px 16px!important}.sim .card-body{padding:18px 14px 16px}.sim .card-compact{padding:14px 14px!important}.sim .card-nopad{padding:0!important}}
+.sim .evc-sm{padding:16px 20px!important}
+.sim .evc-np{padding:0!important}
+@media(max-width:600px){.sim .evc{padding:18px 14px 16px!important}.sim .evc-sm{padding:14px 14px!important}.sim .evc-np{padding:0!important}}
 
 .sim .sec-title{
   font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
