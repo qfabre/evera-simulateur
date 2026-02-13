@@ -43,7 +43,8 @@
   position:relative!important;
 }
 .sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
-.sim section,.sim article,.sim aside{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important;display:block!important}
+.sim article,.sim aside{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important;display:block!important}
+.sim section{margin:0!important;height:auto!important;min-height:0!important;max-width:none!important;display:block!important}
 .sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
 .sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
 .sim div,.sim section,.sim article,.sim aside,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
@@ -64,10 +65,12 @@
   background:var(--surface)!important;border:1px solid var(--border)!important;
   border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;
   margin-bottom:16px!important;overflow:hidden!important;
-  padding:0!important;height:auto!important;
+  padding:24px 24px 20px!important;height:auto!important;
 }
+.sim .card-compact{padding:16px 20px!important}
+.sim .card-nopad{padding:0!important}
 .sim .card-body{padding:24px 24px 20px!important}
-@media(max-width:600px){.sim .card-body{padding:18px 14px 16px}}
+@media(max-width:600px){.sim .card{padding:18px 14px 16px!important}.sim .card-body{padding:18px 14px 16px}.sim .card-compact{padding:14px 14px!important}.sim .card-nopad{padding:0!important}}
 
 .sim .sec-title{
   font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
