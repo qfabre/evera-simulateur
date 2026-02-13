@@ -43,9 +43,10 @@
   position:relative!important;
 }
 .sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
+.sim section,.sim article,.sim aside{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important;display:block!important}
 .sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
 .sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
-.sim div,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
+.sim div,.sim section,.sim article,.sim aside,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
 .sim a,.sim button,.sim input,.sim select,.sim label,.sim table,.sim tr,.sim td,.sim th{
   font-family:inherit!important;line-height:inherit!important;color:inherit;
   border:none;outline:none;background:none;
@@ -186,19 +187,21 @@
 .sim .slider-header .sh-label{font-size:13px;font-weight:600;color:var(--text-2)}
 .sim .slider-header .sh-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
 .sim .slider{
-  -webkit-appearance:none;appearance:none;width:100%;height:4px;
-  border-radius:2px;background:var(--border);outline:none;cursor:pointer;
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;
+  border-radius:3px;background:var(--border);outline:none;cursor:pointer;
 }
+.sim .slider::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:inherit}
 .sim .slider::-webkit-slider-thumb{
-  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;margin-top:-8px;
   background:var(--noir);border:3px solid var(--blanc);
   box-shadow:0 1px 4px rgba(0,0,0,0.2);cursor:pointer;
 }
 .sim .slider::-moz-range-thumb{
-  width:20px;height:20px;border-radius:50%;
+  width:22px;height:22px;border-radius:50%;
   background:var(--noir);border:3px solid var(--blanc);
   box-shadow:0 1px 4px rgba(0,0,0,0.2);cursor:pointer;
 }
+.sim .slider::-moz-range-progress{height:6px;border-radius:3px;background:var(--bleu-fonce)}
 .sim .slider-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:6px!important;font-weight:500}
 .sim .km-split{display:flex;gap:12px;margin-top:14px!important}
 .sim .km-split-item{flex:1;padding:12px 14px!important;border-radius:var(--radius-sm);text-align:center;border:1.5px solid}
@@ -251,13 +254,13 @@
 .sim .modal-overlay.open{display:flex;animation:fadeIn 0.2s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .sim .modal{
-  background:var(--surface);border-radius:16px;width:100%;max-width:820px;
-  box-shadow:0 20px 60px rgba(19,27,29,0.25);animation:slideUp 0.3s ease;
-  overflow:hidden;position:relative;max-height:95vh;overflow-y:auto;
-  display:grid;grid-template-columns:2fr 3fr;
+  background:var(--surface)!important;border-radius:16px!important;width:100%!important;max-width:820px!important;
+  box-shadow:0 20px 60px rgba(19,27,29,0.25)!important;animation:slideUp 0.3s ease;
+  overflow:hidden!important;position:relative!important;max-height:95vh!important;overflow-y:auto!important;
+  display:grid!important;grid-template-columns:2fr 3fr!important;
 }
 @media(max-width:700px){
-  .sim .modal{grid-template-columns:1fr;max-width:460px}
+  .sim .modal{grid-template-columns:1fr!important;max-width:460px!important}
 }
 @keyframes slideUp{from{opacity:0;transform:translateY(20px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 
