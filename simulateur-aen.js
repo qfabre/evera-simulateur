@@ -29,5 +29,5 @@ function skipLead(){closeModal();showResults()}
 ['leadPrenom','leadNom','leadEmail','leadEntreprise'].forEach(id=>{$(id).addEventListener('input',()=>{const e='err'+id.charAt(4).toUpperCase()+id.slice(5);if($(e)){$(e).classList.remove('show');$(id).classList.remove('input-err')}})});
 function updateFiscalHint(){document.querySelector('.ft-hint').textContent=`— Cot. sal. ${$('tauxSal').value}% · Cot. pat. ${$('tauxPat').value}% · TMI ${$('tmi').value}%`}
 function toggleElec(){$('elecContent').classList.toggle('open');$('elecToggle').classList.toggle('open')}
-function toggleTable(){const c=$('fullTable'),t=$('tableToggle'),o=c.classList.toggle('open');t.classList.toggle('open',o);t.innerHTML=o?'Masquer':'Tableau des 4 scénarios'}
+function toggleTable(){const c=$('fullTable'),t=$('tableToggle'),o=c.classList.toggle('open');t.classList.toggle('open',o);const sv='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg> ';t.innerHTML=o?sv+'Masquer le tableau':sv+'Tableau récapitulatif des 4 scénarios'}
 function newSim(){['results','elecContent','elecToggle','fullTable','tableToggle'].forEach(id=>$(id).classList.remove('visible','open'));window.scrollTo({top:0,behavior:'smooth'})}
