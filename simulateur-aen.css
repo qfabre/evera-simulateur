@@ -385,7 +385,7 @@
 }
 .sim .rh-heading em{font-style:normal;color:var(--vert-eau)}
 .sim .rh-sub{font-size:13.5px;opacity:0.5;margin-bottom:24px;max-width:480px}
-.sim .rh-fleet-total{font-size:18px;font-weight:800;color:var(--vert-eau);margin-top:-10px;margin-bottom:22px;display:none;background:rgba(208,237,237,0.15);padding:8px 18px!important;border-radius:8px;border:1px solid rgba(208,237,237,0.3)}
+.sim .rh-fleet-total{font-size:18px;font-weight:800;color:var(--vert-eau);margin-top:-10px;margin-bottom:22px;display:none;background:rgba(208,237,237,0.15);padding:10px 22px!important;border-radius:8px;border:1px solid rgba(208,237,237,0.3);text-align:center}
 .sim .rh-boxes{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:center}
 @media(max-width:600px){.sim .rh-boxes{grid-template-columns:1fr;gap:14px}}
 .sim .rh-box{
