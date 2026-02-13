@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@4aab969a53407fb370acb443c41c1e6a5244cf43/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@65ab5a376e01a3fc9cfe11e835630b37b65e02e8/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
@@ -26,7 +26,7 @@
 .sim .grid{display:grid!important;gap:14px!important}
 .sim .g2{grid-template-columns:1fr 1fr!important}
 .sim .g3{grid-template-columns:1fr 1fr 1fr!important}
-.sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important}
+.sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important}
 @media(max-width:640px){.sim .moto-grid,.sim .g2,.sim .g3,.sim .detail-grid{grid-template-columns:1fr!important}}
 /* Toggle */
 .sim .toggle-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:14px 16px!important;background:#F7F9FB!important;border-radius:8px!important}
@@ -118,13 +118,13 @@
     <span style="display:block !important;margin-bottom:14px !important">
       <label class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important">Méthode d'acquisition</label>
       <span class="acq-grid" style="display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:8px !important">
-        <span class="acq-opt active" data-acq="lld" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+        <span class="acq-opt active" data-acq="lld" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer;background:#D8F3F2 !important;border:1.5px solid #D0EDED !important">
           <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span><span class="acq-name">LLD / LOA</span>
         </span>
-        <span class="acq-opt" data-acq="credit" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+        <span class="acq-opt" data-acq="credit" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer">
           <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-bank"/></svg></span><span class="acq-name">Crédit-bail</span>
         </span>
-        <span class="acq-opt" data-acq="achat" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border:1.5px solid #E0E7EB !important;border-radius:8px !important;cursor:pointer;background:#FFF !important">
+        <span class="acq-opt" data-acq="achat" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer">
           <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-key"/></svg></span><span class="acq-name">Achat</span>
         </span>
       </span>
@@ -516,4 +516,4 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@4aab969a53407fb370acb443c41c1e6a5244cf43/simulateur-aen.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@65ab5a376e01a3fc9cfe11e835630b37b65e02e8/simulateur-aen.js"></script>
