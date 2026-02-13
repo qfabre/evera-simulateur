@@ -28,37 +28,44 @@
   --shadow: 0 1px 2px rgba(19,27,29,0.04), 0 3px 10px rgba(19,27,29,0.05);
   --shadow-lg: 0 4px 12px rgba(19,27,29,0.06), 0 12px 32px rgba(19,27,29,0.08);
 }
-/* ── Scoped reset — neutralise Webflow ── */
-.sim,.sim *,.sim *::before,.sim *::after{margin:0;padding:0;box-sizing:border-box}
+/* ── Aggressive Webflow reset ── */
+.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important;min-height:0!important;min-width:0!important;max-height:none!important;float:none!important;clear:none!important;flex:initial!important;align-self:auto!important;overflow:visible}
 .sim{
-  max-width:820px;margin:0 auto;padding:40px 20px 80px;
-  font-family:'Inter',sans-serif;
-  background:var(--beige);
-  color:var(--text);
-  line-height:1.55;
+  max-width:820px!important;margin:0 auto!important;padding:40px 20px 80px!important;
+  font-family:'Inter',sans-serif!important;
+  background:var(--beige)!important;
+  color:var(--text)!important;
+  line-height:1.55!important;
   -webkit-font-smoothing:antialiased;
-  /* Reset Webflow inherited styles */
-  text-size-adjust:100%;
-  -webkit-text-size-adjust:100%;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  position:relative!important;
 }
+.sim div:not(.modal-overlay):not(.toggle):not(.toggleCarb){margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important;flex:initial!important}
+.sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
+.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
 .sim div,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
 .sim a,.sim button,.sim input,.sim select,.sim label,.sim table,.sim tr,.sim td,.sim th{
-  font-family:inherit;line-height:inherit;color:inherit;
+  font-family:inherit!important;line-height:inherit!important;color:inherit;
   border:none;outline:none;background:none;
-  text-decoration:none;
+  text-decoration:none!important;
   -webkit-font-smoothing:antialiased;
+  letter-spacing:normal!important;
+  text-transform:none!important;
 }
-.sim img{max-width:100%;height:auto;display:block}
+.sim img{max-width:100%!important;height:auto!important;display:block!important}
 .sim a{color:inherit}
-.sim input,.sim select{font-family:inherit;font-size:inherit}
+.sim input,.sim select{font-family:inherit!important;font-size:inherit!important;margin:0!important}
 
 /* ── Card ── */
 .sim .card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);box-shadow:var(--shadow);
-  margin-bottom:16px;overflow:hidden;
+  background:var(--surface)!important;border:1px solid var(--border)!important;
+  border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;
+  margin-bottom:16px!important;overflow:hidden!important;
+  padding:0!important;height:auto!important;
 }
-.sim .card-body{padding:24px 24px 20px}
+.sim .card-body{padding:24px 24px 20px!important}
 @media(max-width:600px){.sim .card-body{padding:18px 14px 16px}}
 
 .sim .sec-title{
@@ -71,7 +78,7 @@
 .sim .ico{width:1em;height:1em;vertical-align:-0.125em;fill:none;stroke:currentColor;stroke-width:16;display:inline-block}
 
 /* ── Motorisation selector ── */
-.sim .moto-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.sim .moto-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin-bottom:8px!important}
 @media(max-width:640px){.sim .moto-grid{grid-template-columns:1fr 1fr}}
 .sim .moto-card{
   border:1.5px solid var(--border);border-radius:var(--radius-sm);
@@ -89,7 +96,7 @@
 .sim .mc-sub{display:none}
 
 /* ── Acquisition method ── */
-.sim .acq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
+.sim .acq-grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
 .sim .acq-opt{
   display:flex;align-items:center;gap:8px;
   padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);
@@ -104,7 +111,7 @@
 @media(max-width:480px){.sim .acq-grid{grid-template-columns:1fr}}
 
 /* ── Toggle row ── */
-.sim .toggle-row{
+.sim .toggle-row{display:flex!important;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 16px;background:var(--surface-alt);border-radius:var(--radius-sm);
   margin-bottom:8px;
@@ -124,9 +131,9 @@
 .sim .toggle.on::after{transform:translateX(20px)}
 
 /* ── Form ── */
-.sim .grid{display:grid;gap:14px}
-.sim .g2{grid-template-columns:1fr 1fr}
-.sim .g3{grid-template-columns:1fr 1fr 1fr}
+.sim .grid{display:grid!important;gap:14px!important}
+.sim .g2{grid-template-columns:1fr 1fr!important}
+.sim .g3{grid-template-columns:1fr 1fr 1fr!important}
 @media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr}}
 .sim .label{
   font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:6px;
@@ -149,11 +156,11 @@
 }
 .sim .tip:hover::after{opacity:1}
 .sim .input-wrap{position:relative}
-.sim .input{
-  width:100%;height:44px;padding:0 14px;
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  font-family:'Inter',sans-serif;font-size:14px;font-weight:500;
-  color:var(--text);background:var(--surface);outline:none;
+.sim .input{display:block!important;
+  width:100%!important;height:44px!important;padding:0 14px!important;
+  border:1.5px solid var(--border)!important;border-radius:var(--radius-sm)!important;
+  font-family:'Inter',sans-serif!important;font-size:14px!important;font-weight:500;
+  color:var(--text)!important;background:var(--surface)!important;outline:none;
   transition:border-color 0.2s,box-shadow 0.2s;
 }
 .sim .input:focus{border-color:var(--noir);box-shadow:0 0 0 3px rgba(19,27,29,0.06)}
@@ -164,7 +171,7 @@
   font-size:11px;font-weight:600;color:var(--text-3);
   background:var(--surface-alt);padding:2px 8px;border-radius:4px;pointer-events:none;
 }
-.sim .select{
+.sim .select{display:block!important;
   width:100%;height:44px;padding:0 34px 0 14px;
   border:1.5px solid var(--border);border-radius:var(--radius-sm);
   font-family:'Inter',sans-serif;font-size:14px;font-weight:500;color:var(--text);
@@ -174,7 +181,7 @@
 .sim .select:focus{border-color:var(--noir);box-shadow:0 0 0 3px rgba(19,27,29,0.06)}
 
 /* ── Sliders ── */
-.sim .slider-group{margin-bottom:4px}
+.sim .slider-group{margin-bottom:4px!important}
 .sim .slider-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
 .sim .slider-header .sh-label{font-size:13px;font-weight:600;color:var(--text-2)}
 .sim .slider-header .sh-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
@@ -209,7 +216,7 @@
 .sim .frais-summary .fs-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
 
 /* ── Fleet presets ── */
-.sim .fleet-presets{display:flex;align-items:center;gap:6px}
+.sim .fleet-presets{display:flex!important!important;align-items:center;gap:6px}
 .sim .fp{
   height:34px;min-width:42px;padding:0 10px;
   border:1.5px solid var(--border);border-radius:100px;background:var(--surface);
@@ -225,7 +232,7 @@
 
 /* ── CTA ── */
 .sim .cta-wrap{margin:28px 0 12px}
-.sim .btn-calc{
+.sim .btn-calc{display:flex!important;
   width:100%;height:52px;display:flex;align-items:center;justify-content:center;gap:8px;
   background:var(--noir);color:var(--blanc);border:none;border-radius:100px;
   font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
@@ -311,7 +318,7 @@
 .sim .mr-subtitle{font-size:13.5px;color:var(--success);font-weight:600;margin-bottom:22px}
 
 .sim .modal-field{margin-bottom:14px;position:relative}
-.sim .modal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sim .modal-row{display:grid!important;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.sim .modal-row{grid-template-columns:1fr}}
 
 /* Inline errors */
@@ -399,7 +406,7 @@
 .sim .rh-arrow svg{transform:rotate(90deg)}
 }
 
-.sim .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 @media(max-width:640px){.sim .detail-grid{grid-template-columns:1fr}}
 .sim .detail-card{position:relative}
 .sim .detail-card.dc-reco{border:2px solid var(--vert-eau)}
