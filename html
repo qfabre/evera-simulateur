@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@0828ffce3957f4d30b922c777770ee2da340e5a5/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@e6f7e372fae074f939411beb6f9f08c1566e9f45/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
@@ -117,7 +117,7 @@
   <div class="card">
     <div class="card-body">
       <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span> Données du véhicule</div>
-      
+
       <div class="mb-14">
         <div class="label">Méthode d'acquisition</div>
         <div class="acq-grid">
@@ -133,7 +133,7 @@
         </div>
       </div>
 
-      <div class="grid g3 mb-14">
+      <div class="grid g3">
         <div>
           <div class="label" id="loyerLabel"><svg class="ico" width="18" height="18"><use href="#ico-card"/></svg> Loyer annuel TTC <span class="tip" data-t="Loyer annuel TTC du véhicule (LLD ou crédit-bail)">?</span></div>
           <div class="input-wrap">
@@ -156,7 +156,13 @@
           </div>
         </div>
       </div>
-      <div class="sec-title mt-8"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</div>
+    </div>
+  </div>
+
+  <!-- Frais annexes -->
+  <div class="card">
+    <div class="card-body">
+      <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes TTC (€/an/véhicule)</div>
       <div class="grid g3">
         <div>
           <div class="label"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</div>
@@ -527,4 +533,4 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@0828ffce3957f4d30b922c777770ee2da340e5a5/simulateur-aen.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@e6f7e372fae074f939411beb6f9f08c1566e9f45/simulateur-aen.js"></script>
