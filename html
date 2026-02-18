@@ -44,8 +44,8 @@
 .sim .results{display:none!important}
 .sim .results.visible{display:block!important}
 /* CTA title + spacing */
-.sim .fc-text-title{font-family:'Manrope',sans-serif!important;font-size:26px!important;font-weight:800!important;color:#131B1D!important;margin-bottom:10px!important;line-height:1.25!important;display:block!important}
-.sim .fleet-cta{gap:28px!important;padding:28px!important}
+.sim .fc-text-title{font-family:'Manrope',sans-serif!important;font-size:26px!important;font-weight:800!important;color:#131B1D!important;margin-bottom:10px!important;line-height:1.25!important;display:block!important;flex-basis:100%!important;width:100%!important}
+.sim .fleet-cta{gap:16px 28px!important;padding:28px!important;flex-wrap:wrap!important}
 /* Hero dark card — restore margins killed by .sim div reset */
 .sim .rh-over{margin-bottom:8px!important}
 .sim .rh-heading{margin-bottom:8px!important}
@@ -356,8 +356,8 @@
 
     <!-- Fleet CTA — clean horizontal bar -->
     <div class="fleet-cta fc-enhanced" id="fleetCta">
+      <div class="fc-text-title" id="fcTitle">Réduisez vos coûts grâce à Evera Fleet</div>
       <div class="fc-text">
-        <div class="fc-text-title" id="fcTitle">Réduisez vos coûts grâce à Evera Fleet</div>
         <div class="fc-text-desc">Forfait ou réel ? Evera Fleet calcule automatiquement le meilleur régime pour chaque collaborateur et simplifie vos déclarations URSSAF.</div>
         <div class="fc-tags">
           <span class="fc-tag">Essai gratuit</span>
