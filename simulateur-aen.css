@@ -72,7 +72,7 @@
 @media(max-width:600px){.sim .evc{padding:18px 14px 16px!important}.sim .evc-sm{padding:14px 14px!important}.sim .evc-np{padding:0!important}}
 
 .sim .sec-title{
-  font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;
+  font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;
   color:var(--text);margin-bottom:20px!important;
   display:flex;align-items:center;gap:8px;
 }
@@ -95,7 +95,7 @@
 .sim .mc-icon{margin-bottom:4px!important;color:var(--bleu-fonce)}
 .sim .mc-icon svg{width:20px;height:20px}
 .sim .moto-card.active .mc-icon{color:var(--bleu-fonce)}
-.sim .mc-label{font-family:'Manrope',sans-serif;font-size:12.5px;font-weight:700;color:var(--text)}
+.sim .mc-label{font-family:'Manrope',sans-serif;font-size:13.5px;font-weight:700;color:var(--text)}
 .sim .mc-sub{display:none}
 
 /* ── Acquisition method ── */
@@ -110,7 +110,7 @@
 .sim .acq-ico{color:var(--text-3);display:flex;align-items:center;justify-content:center}
 .sim .acq-ico .ico{width:16px;height:16px}
 .sim .acq-opt.active .acq-ico{color:var(--bleu-fonce)}
-.sim .acq-name{font-family:'Manrope',sans-serif;font-size:12px;font-weight:700;color:var(--text)}
+.sim .acq-name{font-family:'Manrope',sans-serif;font-size:13px;font-weight:700;color:var(--text)}
 @media(max-width:480px){.sim .acq-grid{grid-template-columns:1fr}}
 
 /* ── Toggle row ── */
@@ -119,7 +119,7 @@
   padding:14px 16px;background:var(--surface-alt);border-radius:var(--radius-sm);
   margin-bottom:8px;
 }
-.sim .toggle-label{font-size:13px;color:var(--text);font-weight:500;max-width:80%}
+.sim .toggle-label{font-size:14px;color:var(--text);font-weight:500;max-width:80%}
 .sim .toggle-label small{display:block;font-size:12px;color:var(--text-3);font-weight:400;margin-top:2px}
 .sim .toggle{
   width:44px;height:24px;border-radius:12px;background:var(--border);
@@ -139,7 +139,7 @@
 .sim .g3{grid-template-columns:1fr 1fr 1fr!important}
 @media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr}}
 .sim .label{
-  font-size:13px;font-weight:600;color:var(--text-2);margin-bottom:6px!important;
+  font-size:14px;font-weight:600;color:var(--text-2);margin-bottom:6px!important;
   display:flex;align-items:center;gap:5px;
 }
 .sim .label .ico{width:14px;height:14px;color:var(--text-3);flex-shrink:0}
@@ -186,8 +186,8 @@
 /* ── Sliders ── */
 .sim .slider-group{margin-bottom:4px!important}
 .sim .slider-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px!important}
-.sim .slider-header .sh-label{font-size:13px;font-weight:600;color:var(--text-2)}
-.sim .slider-header .sh-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
+.sim .slider-header .sh-label{font-size:14px;font-weight:600;color:var(--text-2)}
+.sim .slider-header .sh-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--text)}
 .sim .slider{
   -webkit-appearance:none;appearance:none;width:100%;height:6px;
   border-radius:3px;background:var(--border);outline:none;cursor:pointer;
@@ -217,8 +217,8 @@
   display:flex;align-items:center;justify-content:space-between;
   padding:12px 16px!important;background:var(--bleu);border-radius:var(--radius-sm);margin-top:12px!important;
 }
-.sim .frais-summary .fs-label{font-size:13px;color:var(--bleu-fonce);font-weight:500}
-.sim .frais-summary .fs-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;color:var(--text)}
+.sim .frais-summary .fs-label{font-size:14px;color:var(--bleu-fonce);font-weight:500}
+.sim .frais-summary .fs-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:var(--text)}
 
 /* ── Fleet presets ── */
 .sim .fleet-presets{display:flex!important;align-items:center;gap:6px}
@@ -240,7 +240,7 @@
 .sim .btn-calc{display:flex!important;
   width:100%;height:52px;align-items:center;justify-content:center;gap:8px;
   background:var(--noir)!important;color:var(--blanc)!important;border:none!important;border-radius:100px!important;
-  font-family:'Manrope',sans-serif!important;font-size:15px!important;font-weight:700;
+  font-family:'Manrope',sans-serif!important;font-size:16px!important;font-weight:700;
   cursor:pointer;transition:all 0.2s;
 }
 .sim .btn-calc:hover{box-shadow:0 0 0 2px var(--blanc) inset}
