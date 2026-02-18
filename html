@@ -209,14 +209,14 @@
   <section class="evc evc-sm">
     <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-users"/></svg></span> Taille de votre flotte</div>
     <div class="fleet-presets">
-      <button class="fp active" data-v="1" onclick="setFleet(this)">1</button>
+      <button class="fp" data-v="1" onclick="setFleet(this)">1</button>
       <button class="fp" data-v="10" onclick="setFleet(this)">10</button>
       <button class="fp" data-v="50" onclick="setFleet(this)">50</button>
       <button class="fp" data-v="100" onclick="setFleet(this)">100</button>
       <button class="fp" data-v="200" onclick="setFleet(this)">200</button>
       <button class="fp" data-v="500" onclick="setFleet(this)">500</button>
       <div class="input-wrap fleet-input-wrap">
-        <input type="number" class="input fleet-input" id="flotte" value="1" min="1" step="1" oninput="syncFleetBtns()">
+        <input type="number" class="input fleet-input" id="flotte" value="" min="1" step="1" placeholder="Nb" oninput="syncFleetBtns()">
       </div>
     </div>
   </section>

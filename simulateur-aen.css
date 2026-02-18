@@ -563,6 +563,9 @@
 .sim .no-decoration{text-decoration:none!important}
 .sim .fleet-input-wrap{width:72px}
 .sim .fleet-input{text-align:center;padding:6px 8px!important;font-size:13px}
+.sim .fleet-presets.fleet-required{animation:fleetShake 0.4s ease}
+.sim .fleet-presets.fleet-required .fp,.sim .fleet-presets.fleet-required .fleet-input{border-color:#e74c3c!important;box-shadow:0 0 0 2px rgba(231,76,60,.15)}
+@keyframes fleetShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .sim .btn-fleet-main[data-bg="noir"]{background:var(--noir)!important}
 
 .sim .sim-foot{text-align:center;font-size:11px;color:var(--text-3);margin-top:28px;line-height:1.6}
