@@ -31,7 +31,7 @@
 /* ── Aggressive Webflow reset ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important;min-height:0!important;min-width:0!important;max-height:none;float:none!important;clear:none!important;flex:initial;align-self:auto!important;overflow:visible}
 .sim{
-  max-width:820px!important;margin:0 auto!important;padding:40px 20px 80px!important;
+  max-width:820px!important;margin:0 auto!important;padding:0 20px!important;
   font-family:'Inter',sans-serif!important;
   background:transparent!important;
   color:var(--text)!important;
@@ -447,6 +447,12 @@
 .sim .fc-text{flex:1;min-width:240px}
 .sim .fc-text-title{font-family:'Manrope',sans-serif;font-size:15px;font-weight:700;color:var(--noir);margin-bottom:4px}
 .sim .fc-text-desc{font-size:13px;color:var(--bleu-fonce);line-height:1.5}
+.sim .fc-tags{display:flex;gap:8px;margin-top:10px!important;flex-wrap:wrap}
+.sim .fc-tag{
+  font-size:11px;font-weight:600;color:var(--bleu-fonce);
+  background:var(--vert-pastel);padding:4px 10px!important;border-radius:100px;
+  white-space:nowrap;
+}
 .sim .fc-btns{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
 .sim .btn-fleet-main{
   display:inline-flex!important;align-items:center;gap:8px;
