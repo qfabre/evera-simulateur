@@ -209,14 +209,14 @@
   <section class="evc evc-sm">
     <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-users"/></svg></span> Taille de votre flotte</div>
     <div class="fleet-presets">
-      <button class="fp active" data-v="1" onclick="setFleet(this)">1</button>
+      <button class="fp" data-v="1" onclick="setFleet(this)">1</button>
       <button class="fp" data-v="10" onclick="setFleet(this)">10</button>
       <button class="fp" data-v="50" onclick="setFleet(this)">50</button>
       <button class="fp" data-v="100" onclick="setFleet(this)">100</button>
       <button class="fp" data-v="200" onclick="setFleet(this)">200</button>
       <button class="fp" data-v="500" onclick="setFleet(this)">500</button>
       <div class="input-wrap fleet-input-wrap">
-        <input type="number" class="input fleet-input" id="flotte" value="1" min="1" step="1" oninput="syncFleetBtns()">
+        <input type="number" class="input fleet-input" id="flotte" value="" min="1" step="1" placeholder="Nb" oninput="syncFleetBtns()">
       </div>
     </div>
   </section>
@@ -385,6 +385,7 @@
           <button class="btn-fleet-outline"><svg class="ico" width="18" height="18"><use href="#ico-calendar"/></svg> Planifier une démo</button>
         </a>
       </div>
+      <a href="https://www.evera.co/demo-live" target="_blank" class="no-decoration fc-link" style="margin-top:8px !important">Voir Evera Fleet en action <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></a>
     </div>
 
     <button class="elec-toggle-btn" id="elecToggle" onclick="toggleElec()">
@@ -428,7 +429,6 @@
           <a href="https://evera.co/fleet/electrification-esg-rse" target="_blank" class="no-decoration">
             <button class="btn-fleet-main" data-bg="noir">Découvrir le module <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></button>
           </a>
-          <a href="https://www.evera.co/demo-live" target="_blank" class="no-decoration fc-link">Voir Evera Fleet en action <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></a>
         </div>
       </div>
     </div>
@@ -534,6 +534,7 @@
         <div class="modal-field">
           <div class="label">Téléphone</div>
           <input type="tel" class="input" id="leadTel" placeholder="+33 6 12 34 56 78" autocomplete="tel">
+          <div class="field-err" id="errTel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
         </div>
       </div>
 
