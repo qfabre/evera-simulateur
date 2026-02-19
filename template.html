@@ -1,0 +1,247 @@
+<!-- ═══════════════════════════════════════════════════════
+     EVERA — Simulateur [NOM]
+     Template de base — à dupliquer pour un nouveau simulateur
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- CSS via CDN (remplacer {commit} et {nom}) -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@{commit}/simulateur-{nom}.css"> -->
+
+<style>
+/* ── Critical Webflow override — inline = guaranteed load ── */
+.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
+.sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
+.sim section{margin:0!important;height:auto!important;min-height:0!important;max-width:none!important}
+.sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
+.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
+.sim div,.sim section,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
+.sim a,.sim button,.sim input,.sim select,.sim label,.sim table,.sim tr,.sim td,.sim th{
+  font-family:inherit!important;line-height:inherit!important;color:inherit;
+  border:none;outline:none;background:none;text-decoration:none!important;
+  -webkit-font-smoothing:antialiased;letter-spacing:normal!important;text-transform:none!important
+}
+.sim a{color:inherit!important}
+.sim{max-width:820px!important;margin:0 auto!important;padding:0 20px!important;font-family:'Inter',sans-serif!important;background:transparent!important;color:#131B1D!important;line-height:1.55!important;display:block!important;position:relative!important}
+.sim .svg-sprite{display:none!important;position:absolute!important;width:0!important;height:0!important;overflow:hidden!important}
+/* Cards */
+.sim .evc{background:#FFF!important;border:1px solid #E0E7EB!important;border-radius:12px!important;box-shadow:0 1px 2px rgba(19,27,29,0.04),0 3px 10px rgba(19,27,29,0.05)!important;margin-bottom:16px!important;overflow:visible!important;padding:24px 24px 20px!important}
+.sim .evc-sm{padding:16px 20px!important}
+.sim .evc-np{padding:0!important}
+/* Grids */
+.sim .moto-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin-bottom:8px!important}
+.sim .grid{display:grid!important;gap:14px!important}
+.sim .g2{grid-template-columns:1fr 1fr!important}
+.sim .g3{grid-template-columns:1fr 1fr 1fr!important}
+.sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important}
+@media(max-width:640px){.sim .moto-grid,.sim .g2,.sim .g3,.sim .detail-grid{grid-template-columns:1fr!important}}
+/* Toggle */
+.sim .toggle-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:14px 16px!important;background:#F7F9FB!important;border-radius:8px!important}
+/* Inputs */
+.sim .input{display:block!important;width:100%!important;height:44px!important;padding:0 14px!important;border:1.5px solid #E0E7EB!important;border-radius:8px!important;font-size:14px!important;color:#131B1D!important;background:#FFF!important}
+.sim .select{display:block!important;width:100%!important;height:44px!important;padding:0 34px 0 14px!important;border:1.5px solid #E0E7EB!important;border-radius:8px!important;font-size:14px!important;color:#131B1D!important;background:#FFF!important;appearance:none!important}
+/* Modal */
+.sim .modal-overlay{display:none!important;position:fixed!important;inset:0!important;z-index:9999!important;align-items:center!important;justify-content:center!important}
+.sim .modal-overlay.open{display:flex!important}
+.sim .modal{max-width:820px!important}
+/* Collapsibles */
+.sim .fiscal-content{max-height:0!important;overflow:hidden!important}
+.sim .fiscal-content.open{max-height:300px!important;overflow:hidden!important}
+/* Results */
+.sim .results{display:none!important}
+.sim .results.visible{display:block!important}
+</style>
+
+<!-- SVG Icon Sprite (ajouter les symboles nécessaires) -->
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite">
+  <symbol id="ico-car" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M240 120H220.53a4 4 0 0 1-3.74-2.59L194.42 64.47A8 8 0 0 0 187 60H69a8 8 0 0 0-7.43 5.07L39.58 117.4a4 4 0 0 1-3.74 2.6H16"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M16 168h22m180 0h22M64 168h128"/><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="16" y="120" width="224" height="48" rx="8"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="64" cy="192" r="24"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="192" cy="192" r="24"/></symbol>
+  <symbol id="ico-fuel" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="56" y="56" width="112" height="176" rx="8"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M168 120h28a16 16 0 0 1 16 16v40a16 16 0 0 0 16 16 16 16 0 0 0 16-16V108a8 8 0 0 0-2.34-5.66L216 76"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="56" y1="232" x2="168" y2="232"/><rect fill="none" stroke="currentColor" stroke-width="16" x="88" y="92" width="48" height="36" rx="4"/></symbol>
+  <symbol id="ico-bolt" viewBox="0 0 256 256"><polygon fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="152 32 112 136 168 136 104 224 144 120 88 120"/></symbol>
+  <symbol id="ico-doc" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M200 224H56a8 8 0 0 1-8-8V40a8 8 0 0 1 8-8h96l56 56v128a8 8 0 0 1-8 8z"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="152 32 152 88 208 88"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="96" y1="136" x2="160" y2="136"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="96" y1="168" x2="160" y2="168"/></symbol>
+  <symbol id="ico-euro" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M192 200a88 88 0 1 1 0-144"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="112" x2="160" y2="112"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="144" x2="160" y2="144"/></symbol>
+  <symbol id="ico-wrench" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M210.68 101.32 168 144 112 88l42.68-42.68a68 68 0 0 0-90.45 90.45L34.34 165.66a8 8 0 0 0 0 11.31l44.69 44.69a8 8 0 0 0 11.31 0l29.89-29.89a68 68 0 0 0 90.45-90.45z"/></symbol>
+  <symbol id="ico-shield" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M40 114.79V56a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8v58.77c0 84.18-71.31 112.07-85.54 116.8a7.54 7.54 0 0 1-4.92 0C111.31 226.86 40 198.97 40 114.79z"/></symbol>
+  <symbol id="ico-check" viewBox="0 0 256 256"><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="40 144 96 200 224 72"/></symbol>
+  <symbol id="ico-card" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="24" y="56" width="208" height="144" rx="8"/><line stroke="currentColor" stroke-width="16" x1="24" y1="100" x2="232" y2="100"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="68" y1="140" x2="108" y2="140"/></symbol>
+  <symbol id="ico-bank" viewBox="0 0 256 256"><polygon fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="24 96 128 32 232 96 24 96"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="56" y1="96" x2="56" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="104" y1="96" x2="104" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="152" y1="96" x2="152" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="200" y1="96" x2="200" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="32" y1="176" x2="224" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="16" y1="208" x2="240" y2="208"/></symbol>
+  <symbol id="ico-key" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="140" r="20"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M128 160v40"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="112" y1="184" x2="144" y2="184"/></symbol>
+  <symbol id="ico-users" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="88" cy="108" r="52"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M155.41 57.94A52 52 0 1 1 169.32 160"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M16 197.4a88 88 0 0 1 144 0M169.32 160a88 88 0 0 1 72 37.4"/></symbol>
+  <symbol id="ico-percent" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="200" y1="56" x2="56" y2="200"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="76" cy="76" r="28"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="180" cy="180" r="28"/></symbol>
+  <symbol id="ico-scales" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="128" y1="40" x2="128" y2="216"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="56" y1="216" x2="200" y2="216"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M40 72l48 80a56 56 0 0 1-96 0z"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M168 72l48 80a56 56 0 0 1-96 0z"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="72" x2="216" y2="72"/></symbol>
+  <symbol id="ico-arrow" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="128" x2="216" y2="128"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="168 80 216 128 168 176"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="40" y="40" width="176" height="176" rx="8"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="176" y1="24" x2="176" y2="56"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="80" y1="24" x2="80" y2="56"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="88" x2="216" y2="88"/></symbol>
+  <symbol id="ico-chart" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="228" y1="208" x2="28" y2="208"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="28 160 96 96 152 144 228 64"/></symbol>
+</svg>
+
+<div class="sim">
+
+  <!-- ═══ Section 1 : Saisie ═══ -->
+  <div class="evc">
+    <div class="sec-title">
+      <span class="st-ico"><svg class="ico"><use href="#ico-car"/></svg></span>
+      Titre de la section
+    </div>
+
+    <!-- Grille de sélection -->
+    <div class="moto-grid">
+      <div class="moto-card active" data-type="option1" onclick="setOption(this)">
+        <div class="mc-icon"><svg class="ico"><use href="#ico-car"/></svg></div>
+        <div class="mc-label">Option 1</div>
+      </div>
+      <div class="moto-card" data-type="option2" onclick="setOption(this)">
+        <div class="mc-icon"><svg class="ico"><use href="#ico-bolt"/></svg></div>
+        <div class="mc-label">Option 2</div>
+      </div>
+      <div class="moto-card" data-type="option3" onclick="setOption(this)">
+        <div class="mc-icon"><svg class="ico"><use href="#ico-fuel"/></svg></div>
+        <div class="mc-label">Option 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Section 2 : Paramètres ═══ -->
+  <div class="evc">
+    <div class="sec-title">
+      <span class="st-ico"><svg class="ico"><use href="#ico-doc"/></svg></span>
+      Paramètres
+    </div>
+
+    <div class="grid g2">
+      <div>
+        <div class="label">
+          <svg class="ico"><use href="#ico-euro"/></svg>
+          Label du champ <span class="tip" data-t="Explication au hover">?</span>
+        </div>
+        <div class="input-wrap">
+          <input id="champ1" type="number" class="input has-u" value="5000">
+          <span id="unit1" class="unit">€/an</span>
+        </div>
+      </div>
+      <div>
+        <div class="label">
+          <svg class="ico"><use href="#ico-fuel"/></svg>
+          Autre champ
+        </div>
+        <div class="input-wrap">
+          <input id="champ2" type="number" class="input has-u" value="6" step="0.1">
+          <span class="unit">unité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Bouton CTA ═══ -->
+  <div class="cta-wrap">
+    <button class="btn-calc" onclick="onCalculate()">
+      <svg class="ico"><use href="#ico-chart"/></svg>
+      Calculer
+    </button>
+  </div>
+
+  <!-- ═══ Modal Lead Capture ═══ -->
+  <div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <!-- Left panel -->
+      <div class="modal-left">
+        <div class="ml-badge">Estimation gratuite</div>
+        <div class="ml-title">Découvrez vos résultats</div>
+        <div id="modalSavValue" class="ml-savings">—</div>
+        <div id="modalSavLabel" class="ml-savings-label">d'économies potentielles</div>
+        <ul class="ml-features">
+          <li class="ml-feat">
+            <div class="ml-feat-icon"><svg class="ico"><use href="#ico-check"/></svg></div>
+            <div class="ml-feat-text"><strong>Avantage 1</strong> — description</div>
+          </li>
+          <li class="ml-feat">
+            <div class="ml-feat-icon"><svg class="ico"><use href="#ico-check"/></svg></div>
+            <div class="ml-feat-text"><strong>Avantage 2</strong> — description</div>
+          </li>
+        </ul>
+        <div class="ml-trust">Vos données sont protégées et ne seront pas partagées.</div>
+      </div>
+      <!-- Right panel — form -->
+      <div class="modal-right">
+        <button class="modal-close" onclick="closeModal()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+        <div class="mr-title">Vos résultats détaillés</div>
+        <div class="mr-subtitle">Remplissez pour accéder à votre simulation complète</div>
+        <div class="modal-row">
+          <div class="modal-field">
+            <input id="leadPrenom" class="input" placeholder="Prénom">
+            <div id="errPrenom" class="field-err"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">!</text></svg><span></span></div>
+          </div>
+          <div class="modal-field">
+            <input id="leadNom" class="input" placeholder="Nom">
+            <div id="errNom" class="field-err"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">!</text></svg><span></span></div>
+          </div>
+        </div>
+        <div class="modal-field">
+          <input id="leadEmail" class="input" type="email" placeholder="Email professionnel">
+          <div id="errEmail" class="field-err"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">!</text></svg><span></span></div>
+        </div>
+        <div class="modal-field">
+          <input id="leadEntreprise" class="input" placeholder="Entreprise">
+          <div id="errEntreprise" class="field-err"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">!</text></svg><span></span></div>
+        </div>
+        <div class="modal-field">
+          <input id="leadTel" class="input" type="tel" placeholder="Téléphone (optionnel)">
+          <div id="errTel" class="field-err"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/><text x="8" y="12" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">!</text></svg><span></span></div>
+        </div>
+        <!-- Honeypot -->
+        <div class="hp-field"><input id="leadWebsite" tabindex="-1" autocomplete="off"></div>
+        <button id="btnSubmit" class="btn-modal" onclick="submitLead()">
+          Résultats détaillés
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <div class="modal-legal">
+          En soumettant, vous acceptez notre <a href="https://www.evera.co/politique-de-confidentialite" target="_blank">politique de confidentialité</a>.
+          <br>Pas de spam, jamais.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Résultats ═══ -->
+  <div id="results" class="results">
+    <!-- Carte hero résultat -->
+    <div class="result-hero">
+      <div class="rh-over">Résultat de votre simulation</div>
+      <div class="rh-heading">Vous pouvez économiser <em id="heroSav">—</em><span id="heroFlotteLabel"> par an</span></div>
+      <p id="heroFleetTotal" class="rh-fleet-total"></p>
+    </div>
+
+    <!-- Cartes détaillées -->
+    <div class="detail-grid">
+      <!-- Remplir dynamiquement via JS -->
+    </div>
+
+    <!-- CTA Evera Fleet -->
+    <div class="fleet-cta">
+      <div class="fc-text">
+        <div class="fc-text-title">Passez à l'action avec Evera Fleet</div>
+        <div class="fc-text-desc">Optimisez la gestion de votre flotte automobile.</div>
+      </div>
+      <div class="fc-btns">
+        <a href="https://www.evera.co/fleet" target="_blank" class="btn-fleet-main">
+          <svg class="ico"><use href="#ico-arrow"/></svg> Découvrir
+        </a>
+      </div>
+    </div>
+
+    <!-- Nouvelle simulation -->
+    <div class="new-wrap">
+      <button class="btn-new" onclick="newSim()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        Nouvelle simulation
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <p class="sim-foot">
+    Simulation indicative basée sur vos paramètres — <a href="https://www.evera.co" target="_blank">evera.co</a>
+  </p>
+</div>
+
+<!-- JS via CDN (remplacer {commit} et {nom}) -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@{commit}/simulateur-{nom}.js"></script> -->
