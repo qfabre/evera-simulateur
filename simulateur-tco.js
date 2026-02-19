@@ -116,10 +116,13 @@ function setFleet(e) {
   qA('.fp').forEach(b => b.classList.remove('active'));
   e.classList.add('active');
   $('flotte').value = e.dataset.v;
+  document.querySelector('.fleet-presets').classList.remove('fleet-required');
+  $('errFlotte').style.display = 'none';
 }
 function syncFleetBtns() {
   const v = parseInt($('flotte').value) || 1;
   qA('.fp').forEach(b => b.classList.toggle('active', parseInt(b.dataset.v) === v));
+  if (v >= 1) { document.querySelector('.fleet-presets').classList.remove('fleet-required'); $('errFlotte').style.display = 'none' }
 }
 
 function sliderFill(el) {
@@ -235,6 +238,19 @@ function runCalc() {
    ══════════════════════════════════ */
 
 function onCalculate() {
+  const flV = parseInt($('flotte').value);
+  if (!flV || flV < 1) {
+    const fp = document.querySelector('.fleet-presets');
+    fp.classList.remove('fleet-required');
+    void fp.offsetWidth;
+    fp.classList.add('fleet-required');
+    $('errFlotte').style.display = 'block';
+    $('flotte').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => $('flotte').focus(), 400);
+    return;
+  }
+  document.querySelector('.fleet-presets').classList.remove('fleet-required');
+  $('errFlotte').style.display = 'none';
   if (parseInt($('kmTotal').value) <= 0) return;
   runCalc();
   const sv = Math.abs(cD.diff) * cD.fl;
@@ -300,6 +316,8 @@ function vL() {
   if (!en) { sE('errEntreprise', 'Entreprise requise'); ok = 0 }
   else if (en.length < 2) { sE('errEntreprise', 'Nom trop court'); ok = 0 }
   else if (NJ.some(r => r.test(en))) { sE('errEntreprise', 'Nom invalide'); ok = 0 }
+  const tel = $('leadTel').value.replace(/[\s.\-()]/g, '');
+  if (tel && !/^(\+?\d{10,15})$/.test(tel)) { sE('errTel', 'Numéro invalide (ex: 06 12 34 56 78)'); ok = 0 }
   return ok;
 }
 
@@ -347,9 +365,9 @@ function submitLead() {
 function skipLead() { closeModal(); showResults() }
 
 /* Auto-clear field errors on input */
-['leadPrenom', 'leadNom', 'leadEmail', 'leadEntreprise'].forEach(id => {
+['leadPrenom', 'leadNom', 'leadEmail', 'leadEntreprise', 'leadTel'].forEach(id => {
   $(id)?.addEventListener('input', () => {
-    const e = 'err' + id.charAt(4).toUpperCase() + id.slice(5);
+    const e = id === 'leadTel' ? 'errTel' : 'err' + id.charAt(4).toUpperCase() + id.slice(5);
     if ($(e)) { $(e).classList.remove('show'); $(id).classList.remove('input-err') }
   });
 });

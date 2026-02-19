@@ -644,3 +644,33 @@
 .sim .no-decoration{text-decoration:none!important}
 .sim .fleet-input-wrap{width:72px}
 .sim .fleet-input{text-align:center;padding:6px 8px!important;font-size:13px}
+.sim .fleet-presets.fleet-required{animation:fleetShake 0.4s ease}
+.sim .fleet-presets.fleet-required .fp,.sim .fleet-presets.fleet-required .fleet-input{border-color:#e74c3c!important;box-shadow:0 0 0 2px rgba(231,76,60,.15)}
+@keyframes fleetShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ── Collapsible toggle (fiscal / frais) ── */
+.sim .fiscal-toggle{
+  width:100%;padding:14px 20px!important;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);cursor:pointer;font-family:'Inter',sans-serif;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px!important;transition:all 0.2s;
+}
+.sim .fiscal-toggle:hover{border-color:var(--text-3)}
+.sim .fiscal-toggle .ft-left{display:flex;align-items:center;gap:10px}
+.sim .fiscal-toggle .ft-left .ico{width:18px;height:18px;color:var(--bleu-fonce)}
+.sim .fiscal-toggle .ft-title{font-size:14px;font-weight:600;color:var(--text)}
+.sim .fiscal-toggle .ft-hint{font-size:12px;color:var(--text-3);margin-left:4px}
+.sim .fiscal-toggle svg.chevron{width:18px;height:18px;color:var(--text-3);transition:transform 0.3s}
+.sim .fiscal-toggle.open svg.chevron{transform:rotate(180deg)}
+.sim .fiscal-content{
+  max-height:0!important;overflow:hidden!important;transition:max-height 0.35s ease;
+}
+.sim .fiscal-content.open{max-height:300px!important;overflow:hidden!important}
+
+/* ── CTA tags & link ── */
+.sim .fc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px!important}
+.sim .fc-tag{font-size:11px;font-weight:600;color:var(--bleu-fonce);background:var(--bleu);padding:4px 10px!important;border-radius:100px}
+.sim .fc-link{display:inline-flex!important;align-items:center;gap:4px;font-size:13px;font-weight:600;color:var(--bleu-fonce)!important;margin-top:8px!important}
+.sim .fc-link:hover{text-decoration:underline!important}
+.sim .btn-fleet-main[data-bg="noir"]{background:var(--noir)!important}
+.sim .color-success{color:var(--bleu-fonce)!important}

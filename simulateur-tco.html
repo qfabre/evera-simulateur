@@ -36,6 +36,18 @@
 .sim .results.visible{display:block!important}
 .sim .charts-content{display:none!important}
 .sim .charts-content.open{display:block!important}
+/* Collapsibles */
+.sim .fiscal-content{max-height:0!important;overflow:hidden!important}
+.sim .fiscal-content.open{max-height:300px!important;overflow:hidden!important}
+/* CTA title + spacing */
+.sim .fc-text-title{font-family:'Manrope',sans-serif!important;font-size:26px!important;font-weight:800!important;color:#131B1D!important;margin-bottom:10px!important;line-height:1.25!important;display:block!important;flex-basis:100%!important;width:100%!important}
+.sim .fleet-cta{gap:16px 28px!important;padding:28px!important;flex-wrap:wrap!important}
+/* Hero dark card — restore margins killed by .sim div reset */
+.sim .rh-over{margin-bottom:8px!important}
+.sim .rh-heading{margin-bottom:8px!important}
+.sim .rh-sub{margin-bottom:28px!important}
+.sim .rh-box{padding:20px!important}
+.sim .rh-fleet-total{margin-top:6px!important}
 </style>
 
 <!-- SVG Icon Sprite -->
@@ -148,51 +160,62 @@
     </span>
   </section>
 
-  <!-- Frais annexes -->
-  <section class="evc">
-    <h3 class="sec-title" style="display:flex !important;align-items:center !important;gap:8px !important;margin-bottom:20px !important"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg></span> Frais annexes annuels TTC</h3>
-    <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
-      <label style="display:block !important">
-        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</span>
-        <span class="input-wrap" style="display:block !important;position:relative !important">
-          <input type="number" class="input has-u" id="fraisEntretien" value="1500" min="0" step="50">
-          <span class="unit">€ / an</span>
-        </span>
-      </label>
-      <label style="display:block !important">
-        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</span>
-        <span class="input-wrap" style="display:block !important;position:relative !important">
-          <input type="number" class="input has-u" id="fraisAssurance" value="1600" min="0" step="50">
-          <span class="unit">€ / an</span>
-        </span>
-      </label>
-      <label style="display:block !important">
-        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> TVS / Fiscalité <span class="tip" data-t="Taxe sur les Véhicules de Société annuelle. Les VE en sont exonérés.">?</span></span>
-        <span class="input-wrap" style="display:block !important;position:relative !important">
-          <input type="number" class="input has-u" id="fraisTVS" value="1100" min="0" step="50">
-          <span class="unit">€ / an</span>
-        </span>
-      </label>
-    </span>
-    <span class="frais-summary" style="display:flex !important;align-items:center !important;justify-content:space-between !important;padding:12px 16px !important;background:#EDF5FA !important;border-radius:8px !important;margin-top:12px !important">
-      <span class="fs-label">Total frais annexes</span>
-      <span class="fs-value" id="fraisTotal">4 200 €/an</span>
-    </span>
-  </section>
+  <!-- Frais annexes — collapsible facultatif -->
+  <button class="fiscal-toggle" onclick="this.classList.toggle('open');document.getElementById('fraisContent').classList.toggle('open')">
+    <div class="ft-left">
+      <svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg>
+      <span class="ft-title">Frais annexes TTC</span>
+      <span class="ft-hint">— Entretien · Assurance · TVS (facultatif)</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <div class="fiscal-content" id="fraisContent">
+    <section class="evc mb-12">
+      <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisEntretien" value="1500" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisAssurance" value="1600" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> TVS / Fiscalité <span class="tip" data-t="Taxe sur les Véhicules de Société annuelle. Les VE en sont exonérés.">?</span></span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisTVS" value="1100" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+      </span>
+      <span class="frais-summary" style="display:flex !important;align-items:center !important;justify-content:space-between !important;padding:12px 16px !important;background:#EDF5FA !important;border-radius:8px !important;margin-top:12px !important">
+        <span class="fs-label">Total frais annexes</span>
+        <span class="fs-value" id="fraisTotal">4 200 €/an</span>
+      </span>
+    </section>
+  </div>
 
   <!-- Flotte -->
   <section class="evc evc-sm">
     <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-users"/></svg></span> Nombre de véhicules</div>
     <div class="fleet-presets">
-      <button class="fp active" data-v="1" onclick="setFleet(this)">1</button>
+      <button class="fp" data-v="1" onclick="setFleet(this)">1</button>
       <button class="fp" data-v="10" onclick="setFleet(this)">10</button>
       <button class="fp" data-v="50" onclick="setFleet(this)">50</button>
       <button class="fp" data-v="100" onclick="setFleet(this)">100</button>
       <button class="fp" data-v="200" onclick="setFleet(this)">200</button>
+      <button class="fp" data-v="500" onclick="setFleet(this)">500</button>
       <div class="input-wrap fleet-input-wrap">
-        <input type="number" class="input fleet-input" id="flotte" value="1" min="1" step="1" oninput="syncFleetBtns()">
+        <input type="number" class="input fleet-input" id="flotte" value="" min="1" step="1" placeholder="Nb" oninput="syncFleetBtns()">
       </div>
     </div>
+    <div class="fleet-err" id="errFlotte" style="display:none;color:#e74c3c;font-size:12px;margin-top:6px;font-weight:500">Veuillez indiquer le nombre de véhicules</div>
   </section>
 
   <!-- Kilométrage -->
@@ -491,26 +514,32 @@
     </div>
 
     <!-- Fleet CTA -->
-    <div class="fleet-cta">
+    <div class="fleet-cta fc-enhanced" id="fleetCta">
+      <div class="fc-text-title" id="fcTitle">Prêt à optimiser le TCO de votre flotte ?</div>
       <div class="fc-text">
-        <div class="fc-text-title">Prêt à optimiser le TCO de votre flotte ?</div>
         <div class="fc-text-desc">Evera Fleet calcule automatiquement le TCO de chaque véhicule et identifie les leviers d'économie.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Essai gratuit</span>
+          <span class="fc-tag">Sans engagement</span>
+          <span class="fc-tag">Déploiement en 48h</span>
+        </div>
       </div>
       <div class="fc-btns">
         <a href="https://fleet.evera.co/demo" target="_blank" class="no-decoration">
-          <button class="btn-fleet-main">Essai gratuit <svg class="ico" width="18" height="18"><use href="#ico-arrow-r"/></svg></button>
+          <button class="btn-fleet-main">Commencer gratuitement <svg class="ico" width="18" height="18"><use href="#ico-arrow-r"/></svg></button>
         </a>
         <a href="https://evera.co/fleet/planifiez-votre-demonstration" target="_blank" class="no-decoration">
           <button class="btn-fleet-outline"><svg class="ico" width="18" height="18"><use href="#ico-calendar"/></svg> Planifier une démo</button>
         </a>
       </div>
+      <a href="https://www.evera.co/demo-live" target="_blank" class="no-decoration fc-link" style="margin-top:8px !important">Voir Evera Fleet en action <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></a>
     </div>
 
     <div class="new-wrap">
-      <button class="btn-new" onclick="newSim()">
+      <a href="https://evera.co/fleet/planifiez-votre-demonstration" target="_blank" class="btn-new no-decoration">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
         Nouvelle simulation
-      </button>
+      </a>
     </div>
   </div>
 
@@ -593,10 +622,11 @@
           <div class="modal-field">
             <div class="label">Téléphone</div>
             <input type="tel" class="input" id="leadTel" placeholder="+33 6 12 34 56 78" autocomplete="tel">
+            <div class="field-err" id="errTel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
           </div>
         </div>
 
-        <button class="btn-modal" id="btnSubmit" onclick="submitLead()">
+        <button class="btn-modal Submit-Button" id="btnSubmit" onclick="submitLead()">
           Voir mes résultats gratuitement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
         <div class="modal-legal">En soumettant, vous acceptez la <a href="https://evera.co/politique-de-confidentialite" target="_blank">politique de confidentialité</a> d'Evera.</div>
