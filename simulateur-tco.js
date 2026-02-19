@@ -2,7 +2,7 @@
    EVERA — Simulateur TCO
    ═══════════════════════════════════ */
 
-const WEBHOOK_URL = ""; // À configurer — webhook Zapier pour les leads TCO
+const WEBHOOK_URL = "https://hooks.zapier.com/hooks/catch/18497227/2xs6gn1/";
 
 /* ── Helpers ── */
 const $ = id => document.getElementById(id);
