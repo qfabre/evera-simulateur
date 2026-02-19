@@ -1,0 +1,554 @@
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@a2d02a2/simulateur-aen.css">
+<style>
+/* ── Critical Webflow override — inline = guaranteed load ── */
+.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
+.sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
+.sim section{margin:0!important;height:auto!important;min-height:0!important;max-width:none!important}
+.sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
+.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
+.sim div,.sim section,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
+.sim a,.sim button,.sim input,.sim select,.sim label,.sim table,.sim tr,.sim td,.sim th{
+  font-family:inherit!important;line-height:inherit!important;color:inherit;
+  border:none;outline:none;background:none;text-decoration:none!important;
+  -webkit-font-smoothing:antialiased;letter-spacing:normal!important;text-transform:none!important
+}
+.sim a{color:inherit!important}
+.sim{max-width:820px!important;margin:0 auto!important;padding:0 20px!important;font-family:'Inter',sans-serif!important;background:transparent!important;color:#131B1D!important;line-height:1.55!important;display:block!important;position:relative!important}
+.sim .svg-sprite{display:none!important;position:absolute!important;width:0!important;height:0!important;overflow:hidden!important}
+/* Cards — class=evc to dodge Webflow .card collision */
+.sim .evc{background:#FFF!important;border:1px solid #E0E7EB!important;border-radius:12px!important;box-shadow:0 1px 2px rgba(19,27,29,0.04),0 3px 10px rgba(19,27,29,0.05)!important;margin-bottom:16px!important;overflow:visible!important;padding:24px 24px 20px!important}
+.sim .evc-sm{padding:16px 20px!important}
+.sim .evc-np{padding:0!important}
+/* Grids */
+.sim .moto-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin-bottom:8px!important}
+.sim .acq-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
+.sim .grid{display:grid!important;gap:14px!important}
+.sim .g2{grid-template-columns:1fr 1fr!important}
+.sim .g3{grid-template-columns:1fr 1fr 1fr!important}
+.sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important}
+@media(max-width:640px){.sim .moto-grid,.sim .g2,.sim .g3,.sim .detail-grid{grid-template-columns:1fr!important}}
+/* Toggle */
+.sim .toggle-row{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:14px 16px!important;background:#F7F9FB!important;border-radius:8px!important}
+/* Inputs */
+.sim .input{display:block!important;width:100%!important;height:44px!important;padding:0 14px!important;border:1.5px solid #E0E7EB!important;border-radius:8px!important;font-size:14px!important;color:#131B1D!important;background:#FFF!important}
+.sim .select{display:block!important;width:100%!important;height:44px!important;padding:0 34px 0 14px!important;border:1.5px solid #E0E7EB!important;border-radius:8px!important;font-size:14px!important;color:#131B1D!important;background:#FFF!important;appearance:none!important}
+/* Modal */
+.sim .modal-overlay{display:none!important;position:fixed!important;inset:0!important;z-index:9999!important;align-items:center!important;justify-content:center!important}
+.sim .modal-overlay.open{display:flex!important}
+.sim .modal{max-width:820px!important}
+/* Collapsibles */
+.sim .fiscal-content{max-height:0!important;overflow:hidden!important}
+.sim .fiscal-content.open{max-height:300px!important;overflow:hidden!important}
+/* Results */
+.sim .results{display:none!important}
+.sim .results.visible{display:block!important}
+/* CTA title + spacing */
+.sim .fc-text-title{font-family:'Manrope',sans-serif!important;font-size:26px!important;font-weight:800!important;color:#131B1D!important;margin-bottom:10px!important;line-height:1.25!important;display:block!important;flex-basis:100%!important;width:100%!important}
+.sim .fleet-cta{gap:16px 28px!important;padding:28px!important;flex-wrap:wrap!important}
+.sim .fc-text{flex:1!important;min-width:240px!important}
+/* Hero dark card — restore margins killed by .sim div reset */
+.sim .rh-over{margin-bottom:8px!important}
+.sim .rh-heading{margin-bottom:8px!important}
+.sim .rh-sub{margin-bottom:28px!important}
+.sim .rh-box{padding:20px!important}
+.sim .rh-fleet-total{margin-top:6px!important}
+</style>
+
+<div class="sim">
+
+<!-- SVG Icon Sprite — zero external dependency -->
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-sprite">
+  <symbol id="ico-car" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M240 120H220.53a4 4 0 0 1-3.74-2.59L194.42 64.47A8 8 0 0 0 187 60H69a8 8 0 0 0-7.43 5.07L39.58 117.4a4 4 0 0 1-3.74 2.6H16"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M16 168h22m180 0h22M64 168h128"/><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="16" y="120" width="224" height="48" rx="8"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="64" cy="192" r="24"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="192" cy="192" r="24"/></symbol>
+  <symbol id="ico-fuel" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="56" y="56" width="112" height="176" rx="8"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M168 120h28a16 16 0 0 1 16 16v40a16 16 0 0 0 16 16 16 16 0 0 0 16-16V108a8 8 0 0 0-2.34-5.66L216 76"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="56" y1="232" x2="168" y2="232"/><rect fill="none" stroke="currentColor" stroke-width="16" x="88" y="92" width="48" height="36" rx="4"/></symbol>
+  <symbol id="ico-bolt" viewBox="0 0 256 256"><polygon fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="152 32 112 136 168 136 104 224 144 120 88 120"/></symbol>
+  <symbol id="ico-doc" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M200 224H56a8 8 0 0 1-8-8V40a8 8 0 0 1 8-8h96l56 56v128a8 8 0 0 1-8 8z"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="152 32 152 88 208 88"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="96" y1="136" x2="160" y2="136"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="96" y1="168" x2="160" y2="168"/></symbol>
+  <symbol id="ico-bank" viewBox="0 0 256 256"><polygon fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="24 96 128 32 232 96 24 96"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="56" y1="96" x2="56" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="104" y1="96" x2="104" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="152" y1="96" x2="152" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="200" y1="96" x2="200" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="32" y1="176" x2="224" y2="176"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="16" y1="208" x2="240" y2="208"/></symbol>
+  <symbol id="ico-key" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="140" r="20"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M128 160v40"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="128" y1="180" x2="148" y2="180"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M196 76a68 68 0 1 0-68 84v0a68 68 0 0 0 0-84"/></symbol>
+  <symbol id="ico-card" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="24" y="56" width="208" height="144" rx="8"/><line stroke="currentColor" stroke-width="16" x1="24" y1="100" x2="232" y2="100"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="68" y1="140" x2="108" y2="140"/></symbol>
+  <symbol id="ico-euro" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M192 200a88 88 0 1 1 0-144"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="112" x2="160" y2="112"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="144" x2="160" y2="144"/></symbol>
+  <symbol id="ico-wrench" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M210.68 101.32 168 144 112 88l42.68-42.68a68 68 0 0 0-90.45 90.45L34.34 165.66a8 8 0 0 0 0 11.31l44.69 44.69a8 8 0 0 0 11.31 0l29.89-29.89a68 68 0 0 0 90.45-90.45z"/></symbol>
+  <symbol id="ico-shield" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M40 114.79V56a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8v58.77c0 84.18-71.31 112.07-85.54 116.84a7.54 7.54 0 0 1-5 0C111.31 226.86 40 198.97 40 114.79z"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="88 136 112 160 168 104"/></symbol>
+  <symbol id="ico-circle" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="128" r="96"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="128" r="40"/></symbol>
+  <symbol id="ico-users" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M164.47 195.63a8 8 0 0 0-6.7-12.63H98.23a8 8 0 0 0-6.7 12.63 60 60 0 0 1 72.94 0z"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="136" r="32"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="128" r="96"/></symbol>
+  <symbol id="ico-pin" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="104" r="32"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M208 104c0 72-80 128-80 128S48 176 48 104a80 80 0 0 1 160 0z"/></symbol>
+  <symbol id="ico-percent" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="200" y1="56" x2="56" y2="200"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="76" cy="76" r="28"/><circle fill="none" stroke="currentColor" stroke-width="16" cx="180" cy="180" r="28"/></symbol>
+  <symbol id="ico-scales" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="128" y1="40" x2="128" y2="216"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="56 72 128 56 200 72"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M24 168 56 72l32 96a36 36 0 0 1-64 0z"/><path fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" d="M168 168 200 72l32 96a36 36 0 0 1-64 0z"/></symbol>
+  <symbol id="ico-arrow-r" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="40" y1="128" x2="216" y2="128"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="184 96 216 128 184 160"/></symbol>
+  <symbol id="ico-calendar" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="40" y="48" width="176" height="176" rx="8"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="176" y1="24" x2="176" y2="48"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="80" y1="24" x2="80" y2="48"/><line stroke="currentColor" stroke-width="16" x1="40" y1="88" x2="216" y2="88"/></symbol>
+  <symbol id="ico-chart" viewBox="0 0 256 256"><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="228" y1="208" x2="28" y2="208"/><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="44" y="104" width="56" height="104"/><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="100" y="40" width="56" height="168"/><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="156" y="72" width="56" height="136"/></symbol>
+  <symbol id="ico-check" viewBox="0 0 256 256"><circle fill="none" stroke="currentColor" stroke-width="16" cx="128" cy="128" r="96"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="88 136 112 160 168 104"/></symbol>
+  <symbol id="ico-battery" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="16" y="72" width="200" height="112" rx="12"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="240" y1="104" x2="240" y2="152"/><rect fill="currentColor" x="44" y="100" width="56" height="56" rx="4" opacity="0.35"/></symbol>
+  <symbol id="ico-battery-charge" viewBox="0 0 256 256"><rect fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" x="16" y="72" width="200" height="112" rx="12"/><line stroke="currentColor" stroke-width="16" stroke-linecap="round" x1="240" y1="104" x2="240" y2="152"/><polyline fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" points="124 100 108 128 140 128 124 156"/></symbol>
+
+</svg>
+
+  <!-- ══════ FORM ══════ -->
+
+  <!-- Motorisation -->
+  <section class="evc">
+    <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-car"/></svg></span> Votre véhicule actuel</div>
+    <div class="moto-grid">
+      <div class="moto-card active" data-type="diesel" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg></div><div class="mc-label">Diesel</div>
+      </div>
+      <div class="moto-card" data-type="essence" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg></div><div class="mc-label">Essence</div>
+      </div>
+      <div class="moto-card" data-type="hybride" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-battery"/></svg></div><div class="mc-label">Hybride</div>
+      </div>
+      <div class="moto-card" data-type="phev" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-battery-charge"/></svg></div><div class="mc-label">Hybride recharg.</div>
+      </div>
+      <div class="moto-card" data-type="electrique" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-bolt"/></svg></div><div class="mc-label">Électrique</div>
+      </div>
+      <div class="moto-card" data-type="eco-score" onclick="setMoto(this)">
+        <div class="mc-icon"><svg class="ico" width="18" height="18"><use href="#ico-bolt"/></svg></div><div class="mc-label">Élec. éco-scoré</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prise en charge énergie -->
+  <section class="evc evc-sm">
+    <div class="toggle-row">
+      <div class="toggle-label">
+        <svg class="ico ico-toggle" width="16" height="16"><use href="#ico-fuel"/></svg>L'employeur prend en charge le carburant
+        <small id="carbHint">Forfait à 67 % — l'énergie est incluse dans le calcul des avantages en nature</small>
+      </div>
+      <div class="toggle on" id="toggleCarb" onclick="toggleCarburant()"></div>
+    </div>
+  </section>
+
+  <!-- Données véhicule + Frais annexes -->
+  <section class="evc">
+    <h3 class="sec-title" style="display:flex !important;align-items:center !important;gap:8px !important;margin-bottom:20px !important"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span> Données du véhicule</h3>
+
+    <span style="display:block !important;margin-bottom:14px !important">
+      <label class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important">Méthode d'acquisition</label>
+      <span class="acq-grid" style="display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:8px !important">
+        <span class="acq-opt active" data-acq="lld" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer;background:#D8F3F2 !important;border:1.5px solid #D0EDED !important">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-doc"/></svg></span><span class="acq-name">LLD / LOA</span>
+        </span>
+        <span class="acq-opt" data-acq="credit" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-bank"/></svg></span><span class="acq-name">Crédit-bail</span>
+        </span>
+        <span class="acq-opt" data-acq="achat" onclick="setAcq(this)" style="display:flex !important;align-items:center !important;gap:8px !important;padding:10px 12px !important;border-radius:8px !important;cursor:pointer">
+          <span class="acq-ico" style="display:flex !important"><svg class="ico" width="18" height="18"><use href="#ico-key"/></svg></span><span class="acq-name">Achat</span>
+        </span>
+      </span>
+    </span>
+
+    <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+      <label style="display:block !important">
+        <span class="label" id="loyerLabel" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-card"/></svg> Loyer annuel TTC <span class="tip" data-t="Loyer annuel TTC du véhicule (LLD ou crédit-bail)">?</span></span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
+          <input type="number" class="input has-u" id="loyer" value="12000" min="0" step="100">
+          <span class="unit">€ / an</span>
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-fuel"/></svg> Consommation</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
+          <input type="number" class="input has-u" id="conso" value="6" min="0" step="0.5">
+          <span class="unit" id="consoUnit">L/100km</span>
+        </span>
+      </label>
+      <label style="display:block !important">
+        <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-euro"/></svg> Prix TTC carburant</span>
+        <span class="input-wrap" style="display:block !important;position:relative !important">
+          <input type="number" class="input has-u" id="prix" value="1.70" min="0" step="0.05">
+          <span class="unit" id="prixUnit">€ / L</span>
+        </span>
+      </label>
+    </span>
+
+  </section>
+  <!-- Frais annexes — collapsible facultatif -->
+  <button class="fiscal-toggle" onclick="this.classList.toggle('open');document.getElementById('fraisContent').classList.toggle('open')">
+    <div class="ft-left">
+      <svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg>
+      <span class="ft-title">Frais annexes TTC</span>
+      <span class="ft-hint">— Assurance · Entretien · Pneumatiques (facultatif)</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <div class="fiscal-content" id="fraisContent">
+    <section class="evc mb-12">
+      <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-shield"/></svg> Assurance</span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisAssurance" value="1000" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-wrench"/></svg> Entretien</span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisEntretien" value="800" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-circle"/></svg> Pneumatiques</span>
+          <span class="input-wrap" style="display:block !important;position:relative !important">
+            <input type="number" class="input has-u" id="fraisPneus" value="400" min="0" step="50">
+            <span class="unit">€ / an</span>
+          </span>
+        </label>
+      </span>
+      <span class="frais-summary" style="display:flex !important;align-items:center !important;justify-content:space-between !important;padding:12px 16px !important;background:#EDF5FA !important;border-radius:8px !important;margin-top:12px !important">
+        <span class="fs-label">Total frais annexes</span>
+        <span class="fs-value" id="fraisTotal">2 200 €/an</span>
+      </span>
+    </section>
+  </div>
+
+  <!-- Flotte — compact inline -->
+  <section class="evc evc-sm">
+    <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-users"/></svg></span> Taille de votre flotte</div>
+    <div class="fleet-presets">
+      <button class="fp" data-v="1" onclick="setFleet(this)">1</button>
+      <button class="fp" data-v="10" onclick="setFleet(this)">10</button>
+      <button class="fp" data-v="50" onclick="setFleet(this)">50</button>
+      <button class="fp" data-v="100" onclick="setFleet(this)">100</button>
+      <button class="fp" data-v="200" onclick="setFleet(this)">200</button>
+      <button class="fp" data-v="500" onclick="setFleet(this)">500</button>
+      <div class="input-wrap fleet-input-wrap">
+        <input type="number" class="input fleet-input" id="flotte" value="" min="1" step="1" placeholder="Nb" oninput="syncFleetBtns()">
+      </div>
+    </div>
+    <div class="fleet-err" id="errFlotte" style="display:none;color:#e74c3c;font-size:12px;margin-top:6px;font-weight:500">Veuillez indiquer le nombre de véhicules</div>
+  </section>
+
+  <!-- Kilométrage -->
+  <section class="evc">
+    <div class="sec-title"><span class="st-ico"><svg class="ico" width="18" height="18"><use href="#ico-pin"/></svg></span> Kilométrage annuel</div>
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="sh-label">Kilométrage total</span>
+        <span class="sh-value" id="kmTotalVal">30 000 km</span>
+      </div>
+      <input type="range" class="slider" id="kmTotal" min="5000" max="80000" value="30000" step="1000" oninput="updateKm()">
+      <div class="slider-ticks"><span>5 000 km</span><span>80 000 km</span></div>
+    </div>
+    <div class="slider-group mt-18">
+      <div class="slider-header">
+        <span class="sh-label color-perso">Dont kilométrage personnel</span>
+        <span class="sh-value" id="kmPersoVal">9 000 km</span>
+      </div>
+      <input type="range" class="slider" id="kmPerso" min="0" max="30000" value="9000" step="500" oninput="updateKm()">
+      <div class="slider-ticks"><span>0 km</span><span id="kmPersoMax">30 000 km</span></div>
+    </div>
+    <div class="km-split" id="kmSplit">
+      <div class="km-split-item km-perso"><div class="ks-pct" id="kmPercPerso">30%</div><div class="ks-label">personnel</div></div>
+      <div class="km-split-item km-pro"><div class="ks-pct" id="kmPercPro">70%</div><div class="ks-label">professionnel</div></div>
+    </div>
+  </section>
+
+  <!-- Fiscal — collapsible -->
+  <button class="fiscal-toggle" onclick="this.classList.toggle('open');document.getElementById('fiscalContent').classList.toggle('open')">
+    <div class="ft-left">
+      <svg class="ico" width="18" height="18"><use href="#ico-bank"/></svg>
+      <span class="ft-title">Paramètres fiscaux</span>
+      <span class="ft-hint">— Cot. sal. 22% · Cot. pat. 42% · TMI 30%</span>
+    </div>
+    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+  <div class="fiscal-content" id="fiscalContent">
+    <section class="evc mb-12">
+      <span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations salariales <span class="tip" data-t="Part salariale des cotisations sociales">?</span></span>
+          <select class="select" id="tauxSal" onchange="updateFiscalHint()">
+            <option value="18">18%</option>
+            <option value="20">20%</option>
+            <option value="22" selected>22% (standard)</option>
+            <option value="24">24%</option>
+            <option value="25">25% (cadre)</option>
+          </select>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-percent"/></svg> Cotisations patronales <span class="tip" data-t="Part employeur des cotisations sociales">?</span></span>
+          <select class="select" id="tauxPat" onchange="updateFiscalHint()">
+            <option value="35">35%</option>
+            <option value="38">38%</option>
+            <option value="42" selected>42% (standard)</option>
+            <option value="45">45% (cadre)</option>
+            <option value="48">48%</option>
+          </select>
+        </label>
+        <label style="display:block !important">
+          <span class="label" style="display:flex !important;align-items:center !important;gap:5px !important;margin-bottom:6px !important"><svg class="ico" width="18" height="18"><use href="#ico-scales"/></svg> Tranche marginale IR</span>
+          <select class="select" id="tmi" onchange="updateFiscalHint()">
+            <option value="0">0% — jusqu'à 11 294 €</option>
+            <option value="11">11% — de 11 295 à 28 797 €</option>
+            <option value="30" selected>30% — de 28 798 à 82 341 €</option>
+            <option value="41">41% — de 82 342 à 177 106 €</option>
+            <option value="45">45% — au-delà de 177 106 €</option>
+          </select>
+        </label>
+      </span>
+    </section>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <button class="btn-calc" onclick="onCalculate()">
+      Calculer les avantages en nature <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+
+  <!-- ══════ RESULTS ══════ -->
+  <div class="results" id="results">
+    <div class="result-hero">
+      <div class="rh-over">RÉSULTAT DE VOTRE SIMULATION</div>
+      <div class="rh-heading">En passant au réel, économisez <em id="heroSav">—</em><span id="heroFlotteLabel"> par an</span></div>
+      <div class="rh-sub">Le calcul au réel, basé sur le suivi précis des km pro/perso, réduit l'avantage en nature déclaré.</div>
+      <span class="rh-fleet-total" id="heroFleetTotal"></span>
+      <div class="rh-boxes">
+        <div class="rh-box">
+          <div class="rb-tag">Méthode actuelle</div>
+          <div class="rb-label">Forfait</div>
+          <div class="rb-val" id="heroForf">—</div>
+          <div class="rb-foot">Coût total / véhicule / an</div>
+        </div>
+        <div class="rh-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div class="rh-arrow-val" id="heroArrow">—</div>
+        </div>
+        <div class="rh-box reco">
+          <div class="rb-tag">Recommandé</div>
+          <div class="rb-label">Réel (Evera Fleet)</div>
+          <div class="rb-val" id="heroReel">—</div>
+          <div class="rb-foot">Coût total / véhicule / an</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calc debug — visible only for @evera.co -->
+    <div class="calc-debug" id="calcDebug"></div>
+
+    <div class="detail-grid">
+      <section class="evc evc-np detail-card dc-base">
+        <div class="dc-head">
+          <div class="dc-title">Forfait — méthode courante</div>
+          <span class="dc-tag dc-tag-base">Actuel</span>
+        </div>
+        <div class="dc-body">
+          <div class="dc-sep">Côté salarié</div>
+          <div class="dr"><span class="dl">Avantage en nature</span><span class="dv" id="r_f_aen">—</span></div>
+          <div class="dr"><span class="dl">Charges salariales</span><span class="dv" id="r_f_cs">—</span></div>
+          <div class="dr"><span class="dl">Impôt sur le revenu</span><span class="dv" id="r_f_ir">—</span></div>
+          <div class="dc-total"><span class="dl">Coût salarié</span><span class="dv" id="r_f_ts">—</span></div>
+          <div class="dc-sep mt-12">Côté employeur</div>
+          <div class="dr"><span class="dl">Coût véhicule + énergie</span><span class="dv" id="r_f_veh">—</span></div>
+          <div class="dr"><span class="dl">Charges patronales</span><span class="dv" id="r_f_cp">—</span></div>
+          <div class="dc-total"><span class="dl">Coût employeur</span><span class="dv" id="r_f_te">—</span></div>
+        </div>
+      </section>
+      <section class="evc evc-np detail-card dc-reco">
+        <div class="dc-head">
+          <div class="dc-title">Réel — avec Evera Fleet</div>
+          <span class="dc-tag dc-tag-reco">Recommandé</span>
+        </div>
+        <div class="dc-body">
+          <div class="dc-sep">Côté salarié</div>
+          <div class="dr"><span class="dl">Avantage en nature</span><span class="dv" id="r_r_aen">—</span></div>
+          <div class="dr"><span class="dl">Charges salariales</span><span class="dv" id="r_r_cs">—</span></div>
+          <div class="dr"><span class="dl">Impôt sur le revenu</span><span class="dv" id="r_r_ir">—</span></div>
+          <div class="dc-total"><span class="dl">Coût salarié</span><span class="dv v-success" id="r_r_ts">—</span></div>
+          <div class="dc-sep mt-12">Côté employeur</div>
+          <div class="dr"><span class="dl">Coût véhicule + énergie</span><span class="dv" id="r_r_veh">—</span></div>
+          <div class="dr"><span class="dl">Charges patronales</span><span class="dv" id="r_r_cp">—</span></div>
+          <div class="dc-total"><span class="dl">Coût employeur</span><span class="dv v-success" id="r_r_te">—</span></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Fleet CTA — clean horizontal bar -->
+    <div class="fleet-cta fc-enhanced" id="fleetCta">
+      <div class="fc-text-title" id="fcTitle">Réduisez vos coûts grâce à Evera Fleet</div>
+      <div class="fc-text">
+        <div class="fc-text-desc">Forfait ou réel ? Evera Fleet calcule automatiquement le meilleur régime pour chaque collaborateur et simplifie vos déclarations URSSAF.</div>
+        <div class="fc-tags">
+          <span class="fc-tag">Essai gratuit</span>
+          <span class="fc-tag">Sans engagement</span>
+          <span class="fc-tag">Déploiement en 48h</span>
+        </div>
+      </div>
+      <div class="fc-btns">
+        <a href="https://fleet.evera.co/demo" target="_blank" class="no-decoration">
+          <button class="btn-fleet-main">Commencer gratuitement <svg class="ico" width="18" height="18"><use href="#ico-arrow-r"/></svg></button>
+        </a>
+        <a href="https://evera.co/fleet/planifiez-votre-demonstration" target="_blank" class="no-decoration">
+          <button class="btn-fleet-outline"><svg class="ico" width="18" height="18"><use href="#ico-calendar"/></svg> Planifier une démo</button>
+        </a>
+      </div>
+      <a href="https://www.evera.co/demo-live" target="_blank" class="no-decoration fc-link" style="margin-top:8px !important">Voir Evera Fleet en action <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></a>
+    </div>
+
+    <button class="elec-toggle-btn" id="elecToggle" onclick="toggleElec()">
+      <div class="etl-left">
+        <div class="etl-icon"><svg class="ico ico-lg color-success" width="20" height="20"><use href="#ico-bolt"/></svg></div>
+        <div><div class="etl-t">Aller plus loin : passer à l'électrique</div><div class="etl-s">Économies supplémentaires avec un VE éco-scoré</div></div>
+      </div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="elec-content" id="elecContent">
+      <div class="elec-grid">
+        <div class="elec-mini"><div class="em-title">Élec. forfait (50% − abattement 70%)</div>
+          <div class="em-row"><span class="el">AEN</span><span class="ev" id="e_f_aen">—</span></div>
+          <div class="em-row"><span class="el">Charges salariales</span><span class="ev" id="e_f_cs">—</span></div>
+          <div class="em-row"><span class="el">Impôt</span><span class="ev" id="e_f_ir">—</span></div>
+          <div class="em-total"><span class="el">Coût salarié</span><span class="ev" id="e_f_ts">—</span></div>
+          <div class="spacer-10"></div>
+          <div class="em-row"><span class="el">Coût véhicule</span><span class="ev" id="e_f_veh">—</span></div>
+          <div class="em-row"><span class="el">Charges patronales</span><span class="ev" id="e_f_cp">—</span></div>
+          <div class="em-total"><span class="el">Coût employeur</span><span class="ev" id="e_f_te">—</span></div>
+        </div>
+        <div class="elec-mini"><div class="em-title">Élec. réel (abattement 50%)</div>
+          <div class="em-row"><span class="el">AEN</span><span class="ev" id="e_r_aen">—</span></div>
+          <div class="em-row"><span class="el">Charges salariales</span><span class="ev" id="e_r_cs">—</span></div>
+          <div class="em-row"><span class="el">Impôt</span><span class="ev" id="e_r_ir">—</span></div>
+          <div class="em-total"><span class="el">Coût salarié</span><span class="ev" id="e_r_ts">—</span></div>
+          <div class="spacer-10"></div>
+          <div class="em-row"><span class="el">Coût véhicule</span><span class="ev" id="e_r_veh">—</span></div>
+          <div class="em-row"><span class="el">Charges patronales</span><span class="ev" id="e_r_cp">—</span></div>
+          <div class="em-total"><span class="el">Coût employeur</span><span class="ev" id="e_r_te">—</span></div>
+        </div>
+      </div>
+
+      <!-- Electric fleet CTA -->
+      <div class="fleet-cta mt-16">
+        <div class="fc-text">
+          <div class="fc-text-title"><svg class="ico color-success" width="24" height="24"><use href="#ico-bolt"/></svg> Électrifiez votre flotte avec Evera</div>
+          <div class="fc-text-desc">Pilotez votre transition ESG/RSE : TCO, scoring environnemental et plan d'électrification sur mesure.</div>
+        </div>
+        <div class="fc-btns">
+          <a href="https://evera.co/fleet/electrification-esg-rse" target="_blank" class="no-decoration">
+            <button class="btn-fleet-main" data-bg="noir">Découvrir le module <svg class="ico ico-xs" width="14" height="14"><use href="#ico-arrow-r"/></svg></button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <section class="evc evc-np">
+      <button class="table-toggle" id="tableToggle" onclick="toggleTable()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+        Tableau récapitulatif des 4 scénarios
+      </button>
+      <div class="table-content" id="fullTable">
+        <table class="ftable"><thead><tr>
+          <th></th><th>Forfait</th><th style="color:#63768D">Réel ✦</th><th>Forfait élec.</th><th>Réel élec.</th>
+        </tr></thead><tbody id="ftableBody"></tbody></table>
+      </div>
+    </section>
+
+    <div class="new-wrap">
+      <a href="https://evera.co/fleet/planifiez-votre-demonstration" target="_blank" class="btn-new no-decoration">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        Nouvelle simulation
+      </a>
+    </div>
+  </div>
+
+  <div class="sim-foot">
+    Simulation indicative basée sur le barème URSSAF 2026. Les résultats ne constituent pas un conseil fiscal.<br>
+    Véhicules électriques éco-scorés : abattement 70% (forfait) et 50% (réel).
+  </div>
+
+<!-- ══════ MODAL — horizontal split layout ══════ -->
+<div class="modal-overlay" id="modal">
+  <article class="modal" style="max-width:820px !important">
+
+    <!-- Left panel — value props -->
+    <aside class="modal-left">
+      <div class="ml-badge">Résultats gratuits</div>
+      <div class="ml-title">Découvrez comment économiser</div>
+      <div class="ml-savings" id="modalSavValue">—</div>
+      <div class="ml-savings-label" id="modalSavLabel">d'économies / an sur votre flotte</div>
+
+      <div class="ml-features">
+        <div class="ml-feat">
+          <div class="ml-feat-icon"><svg class="ico" width="18" height="18"><use href="#ico-chart"/></svg></div>
+          <div class="ml-feat-text">Comparaison <strong>Forfait vs Réel</strong> adaptée à votre véhicule</div>
+        </div>
+        <div class="ml-feat">
+          <div class="ml-feat-icon"><svg class="ico" width="18" height="18"><use href="#ico-euro"/></svg></div>
+          <div class="ml-feat-text">Économies chiffrées <strong>salarié & employeur</strong></div>
+        </div>
+        <div class="ml-feat">
+          <div class="ml-feat-icon"><svg class="ico" width="18" height="18"><use href="#ico-users"/></svg></div>
+          <div class="ml-feat-text">Projection sur <strong>toute votre flotte</strong></div>
+        </div>
+        <div class="ml-feat">
+          <div class="ml-feat-icon"><svg class="ico" width="18" height="18"><use href="#ico-check"/></svg></div>
+          <div class="ml-feat-text">Recommandations d'<strong>optimisation</strong> personnalisées</div>
+        </div>
+      </div>
+
+      <div class="ml-trust">+1 000 entreprises utilisent Evera Fleet</div>
+    </aside>
+
+    <!-- Right panel — form -->
+    <div class="modal-right">
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="mr-title">Accédez à mes calculs détaillés</div>
+      <div class="mr-subtitle">30 secondes pour accéder à votre rapport complet.</div>
+
+      <!-- Honeypot anti-bot -->
+      <div class="hp-field" aria-hidden="true">
+        <label>Website</label>
+        <input type="text" id="leadWebsite" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="modal-row">
+        <div class="modal-field">
+          <div class="label">Prénom *</div>
+          <input type="text" class="input" id="leadPrenom" placeholder="Jean" autocomplete="given-name">
+          <div class="field-err" id="errPrenom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
+        </div>
+        <div class="modal-field">
+          <div class="label">Nom *</div>
+          <input type="text" class="input" id="leadNom" placeholder="Dupont" autocomplete="family-name">
+          <div class="field-err" id="errNom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <div class="label">Email professionnel *</div>
+        <input type="email" class="input" id="leadEmail" placeholder="jean@entreprise.com" autocomplete="email">
+        <div class="field-err" id="errEmail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
+      </div>
+
+      <div class="modal-row">
+        <div class="modal-field">
+          <div class="label">Entreprise *</div>
+          <input type="text" class="input" id="leadEntreprise" placeholder="Nom de l'entreprise" autocomplete="organization">
+          <div class="field-err" id="errEntreprise"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
+        </div>
+        <div class="modal-field">
+          <div class="label">Téléphone</div>
+          <input type="tel" class="input" id="leadTel" placeholder="+33 6 12 34 56 78" autocomplete="tel">
+          <div class="field-err" id="errTel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span></span></div>
+        </div>
+      </div>
+
+      <button class="btn-modal Submit-Button" id="btnSubmit" onclick="submitLead()">
+        Voir mes résultats gratuitement <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div class="modal-legal">En soumettant, vous acceptez la <a href="https://evera.co/politique-de-confidentialite" target="_blank">politique de confidentialité</a> d'Evera.</div>
+    </div>
+
+  </article>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@a2d02a2/simulateur-aen.js"></script>
