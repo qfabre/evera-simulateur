@@ -1,7 +1,7 @@
 const WEBHOOK_URL="https://hooks.zapier.com/hooks/catch/18497227/2xsufh3/";
 const $=id=>document.getElementById(id),V=id=>parseFloat($(id).value)||0,fmt=n=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n),fK=n=>n.toLocaleString('fr-FR')+' km',qA=s=>document.querySelectorAll(s);
 let carbI=1,cD=null,mAt=0,userIP=null;
-const IP_COOLDOWN=86400000;const IP_STORAGE_KEY='aen_submissions';
+const IP_COOLDOWN=604800000;const IP_STORAGE_KEY='aen_submissions';
 (function(){try{fetch('https://api.ipify.org?format=json').then(r=>r.json()).then(d=>{userIP=d.ip}).catch(()=>{})}catch(e){}})();
 function canSubmitIP(){if(!userIP)return true;try{const subs=JSON.parse(localStorage.getItem(IP_STORAGE_KEY)||'{}');const last=subs[userIP];if(last&&Date.now()-last<IP_COOLDOWN)return false}catch(e){}return true}
 function markSubmitIP(){if(!userIP)return;try{const subs=JSON.parse(localStorage.getItem(IP_STORAGE_KEY)||'{}');const now=Date.now();Object.keys(subs).forEach(k=>{if(now-subs[k]>IP_COOLDOWN)delete subs[k]});subs[userIP]=now;localStorage.setItem(IP_STORAGE_KEY,JSON.stringify(subs))}catch(e){}}
