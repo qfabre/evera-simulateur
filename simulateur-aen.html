@@ -1,11 +1,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@simulateur-aen/simulateur-aen.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur@simulateur-aen/simulateur-aen.css">
 <style>
 /* ── Critical Webflow override — inline = guaranteed load ── */
 .sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important}
 .sim div{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;max-width:none!important}
 .sim section{margin:0!important;height:auto!important;min-height:0!important;max-width:none!important}
-.sim span,.sim p,.sim a,.sim button,.sim label{margin:0;padding:0}
+.sim span,.sim p,.sim a,.sim button,.sim label{margin:0!important;padding:0}
 .sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6{margin:0!important;padding:0!important}
 .sim div,.sim section,.sim span,.sim p,.sim h1,.sim h2,.sim h3,.sim h4,.sim h5,.sim h6,
 .sim a,.sim button,.sim input,.sim select,.sim label,.sim table,.sim tr,.sim td,.sim th{
@@ -24,7 +24,7 @@
 .sim .moto-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;margin-bottom:8px!important}
 .sim .acq-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
 @media(max-width:640px){.sim .acq-grid{grid-template-columns:1fr!important}}
-.sim .grid{display:grid!important;gap:14px!important}
+.sim .grid{display:grid!important;gap:14px!important;margin:0!important;padding:0!important}
 .sim .g2{grid-template-columns:1fr 1fr!important}
 .sim .g3{grid-template-columns:1fr 1fr 1fr!important}
 .sim .detail-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important}
@@ -551,4 +551,4 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur-aen@simulateur-aen/simulateur-aen.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/qfabre/evera-simulateur@simulateur-aen/simulateur-aen.js"></script>
