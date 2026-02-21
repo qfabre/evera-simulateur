@@ -134,7 +134,7 @@
 .sim .toggle.on::after{transform:translateX(20px)}
 
 /* ── Form ── */
-.sim .grid{display:grid!important;gap:14px!important}
+.sim .grid{display:grid!important;gap:14px!important;margin:0!important;padding:0!important}
 .sim .g2{grid-template-columns:1fr 1fr!important}
 .sim .g3{grid-template-columns:1fr 1fr 1fr!important}
 @media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr!important}}
