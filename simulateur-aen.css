@@ -206,7 +206,7 @@
 .sim .slider::-moz-range-progress{height:6px;border-radius:3px;background:var(--bleu-fonce)}
 .sim .slider-ticks{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:6px!important;font-weight:500}
 .sim .km-split{display:flex;gap:12px;margin-top:14px!important}
-.sim .km-split-item{flex:1;padding:12px 14px!important;border-radius:var(--radius-sm);text-align:center;border:1.5px solid}
+.sim .km-split-item{flex:1!important;padding:12px 14px!important;border-radius:var(--radius-sm);text-align:center;border:1.5px solid}
 .sim .km-split-item.km-perso{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.2)}
 .sim .km-split-item.km-pro{background:rgba(59,130,246,0.06);border-color:rgba(59,130,246,0.2)}
 .sim .km-split-item .ks-pct{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700}
