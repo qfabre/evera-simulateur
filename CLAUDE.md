@@ -88,18 +88,25 @@ Sprite SVG inline en début de HTML, symboles réutilisés via `<use href="#ico-
 
 Le reset Webflow inline applique `flex:initial!important` sur `.sim *`. Un style inline `!important` ne peut PAS être overridé par une media query dans `<style>` ou dans le CSS externe — même avec `!important`. C'est un piège CSS fondamental dans ce contexte embed.
 
-**Patron correct — utiliser les classes CSS :**
+**Patron correct — approche hybride inline + classe :**
 ```html
-<!-- BON : classe CSS, la media query peut l'overrider -->
-<span class="grid g3">
+<!-- BON : inline style pour les propriétés fixes + classe pour grid-template-columns -->
+<span class="g3" style="display:grid !important;gap:14px !important;margin:0 !important;padding:0 !important">
   <label>...</label>
   <label>...</label>
   <label>...</label>
 </span>
 
-<!-- MAUVAIS : inline style, impossible à overrider en responsive -->
-<span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important">
+<!-- MAUVAIS : tout en inline style → grid-template-columns impossible à overrider en responsive -->
+<span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important;gap:14px !important">
+
+<!-- MAUVAIS : tout en classe CSS → Webflow peut overrider display/gap/margin/padding -->
+<span class="grid g3">
 ```
+
+**Pourquoi l'hybride :**
+- `display:grid`, `gap`, `margin:0`, `padding:0` → **inline `style`** = spécificité max, Webflow ne peut pas overrider
+- `grid-template-columns` → **classe CSS** (`.g3`, `.g2`, `.acq-grid`) = overridable par la media query responsive
 
 **Breakpoints et comportement mobile (max-width: 640px) :**
 - `.g3` → 1 colonne
@@ -188,7 +195,8 @@ Le bloc `<style>` inline au début du HTML est **critique** — il garantit le r
 
 | Piège | Pourquoi | Solution |
 |-------|----------|----------|
-| `style="grid-template-columns:..."` inline | Impossible à overrider en responsive, même avec `!important` en media query | Utiliser les classes `.grid .g2` / `.grid .g3` |
+| `style="grid-template-columns:..."` inline | Impossible à overrider en responsive, même avec `!important` en media query | Utiliser la classe `.g3` pour `grid-template-columns` uniquement |
+| Tout mettre en classe CSS (ex: `class="grid g3"`) | Webflow peut overrider `display`, `gap`, `margin`, `padding` via ses propres `!important` | Approche hybride : inline `style` pour les props fixes + classe pour `grid-template-columns` |
 | Oublier `flex:1!important` dans le `<style>` inline | Le reset global `flex:initial!important` écrase tous les `flex:1` du CSS externe | Déclarer chaque `flex:1` dans le `<style>` inline du HTML |
 | Flex container sans `min-width:0` | Les enfants flex débordent au lieu de se tronquer | Ajouter `min-width:0!important` sur les flex containers qui doivent rétrécir |
 | Texte long dans `.fiscal-toggle` | Le hint + titre + icône débordent sur mobile | `.ft-hint` masqué à 640px, `.ft-left` en `flex-wrap:wrap` |
