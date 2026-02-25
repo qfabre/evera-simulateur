@@ -82,6 +82,43 @@ Sprite SVG inline en début de HTML, symboles réutilisés via `<use href="#ico-
 - Pas de BEM — on privilégie des classes simples et descriptives
 - `!important` sur les propriétés critiques (nécessaire pour l'override Webflow)
 
+### Responsive (mobile-first issues)
+
+**Règle critique : JAMAIS de `grid-template-columns` en inline `style`**
+
+Le reset Webflow inline applique `flex:initial!important` sur `.sim *`. Un style inline `!important` ne peut PAS être overridé par une media query dans `<style>` ou dans le CSS externe — même avec `!important`. C'est un piège CSS fondamental dans ce contexte embed.
+
+**Patron correct — utiliser les classes CSS :**
+```html
+<!-- BON : classe CSS, la media query peut l'overrider -->
+<span class="grid g3">
+  <label>...</label>
+  <label>...</label>
+  <label>...</label>
+</span>
+
+<!-- MAUVAIS : inline style, impossible à overrider en responsive -->
+<span style="display:grid !important;grid-template-columns:1fr 1fr 1fr !important">
+```
+
+**Breakpoints et comportement mobile (max-width: 640px) :**
+- `.g3` → 1 colonne
+- `.g2` → 1 colonne
+- `.acq-grid` → 1 colonne
+- `.moto-grid` → 2 colonnes
+- `.detail-grid` → 1 colonne
+
+**Overrides flex dans le `<style>` inline HTML :**
+Quand un composant a besoin de `flex:1` ou `flex-shrink:0`, il faut l'ajouter explicitement dans le bloc `<style>` inline du HTML pour contrer le reset global `flex:initial!important`. Exemples :
+```css
+.sim .km-split-item{flex:1!important}
+.sim .fiscal-toggle .ft-left{flex:1!important;min-width:0!important;flex-wrap:wrap!important}
+.sim .fiscal-toggle .ft-left .ico,.sim .fiscal-toggle svg.chevron{flex-shrink:0!important}
+```
+
+**Sections collapsibles (fiscal-toggle) sur mobile :**
+Le `.ft-hint` (sous-texte "— Cot. sal. 22% · ...") est masqué sur mobile via `display:none!important` à 640px pour éviter le débordement.
+
 ### JavaScript
 - Vanilla JS uniquement, pas de dépendances
 - Helpers communs : `$()` (getElementById), `V()` (parseFloat value), `fmt()` (format monétaire), `fK()` (format km), `qA()` (querySelectorAll)
@@ -106,6 +143,32 @@ Sprite SVG inline en début de HTML, symboles réutilisés via `<use href="#ico-
 <script src="CDN/simulateur-xxx.js"></script>
 ```
 
+### Reset Webflow inline (`<style>` dans le HTML)
+
+Le bloc `<style>` inline au début du HTML est **critique** — il garantit le rendu même si le CSS CDN est lent. Il contient :
+
+1. **Reset global** : `box-sizing`, neutralisation de `float`, `flex`, `align-self`, `margin`, `padding` sur tous les enfants de `.sim`
+2. **Overrides flex spécifiques** : tout composant ayant besoin de `flex:1` ou `flex-shrink:0` doit être déclaré ici (ex: `.km-split-item`, `.ft-left`)
+3. **Grilles** : définitions de `.grid`, `.g2`, `.g3`, `.acq-grid`, `.moto-grid`, `.detail-grid`
+4. **Media queries responsive** : passage en 1 colonne à 640px
+5. **Masquage conditionnel** : `.ft-hint` masqué sur mobile, `.results` masqué par défaut
+6. **Modal** : `display:none` / `display:flex` pour `.modal-overlay`
+
+**Template du bloc `<style>` inline** (à copier depuis `simulateur-aen.html`) :
+```css
+/* Reset Webflow */
+.sim,.sim *,.sim *::before,.sim *::after{box-sizing:border-box!important;...;flex:initial!important;...}
+/* Overrides flex */
+.sim .km-split-item{flex:1!important}
+.sim .fiscal-toggle .ft-left{flex:1!important;min-width:0!important;flex-wrap:wrap!important}
+/* Grids + responsive */
+.sim .grid{display:grid!important;gap:14px!important;...}
+.sim .g3{grid-template-columns:1fr 1fr 1fr!important}
+@media(max-width:640px){.sim .g3,.sim .g2,.sim .acq-grid,.sim .detail-grid{grid-template-columns:1fr!important}}
+/* Toggle hint mobile */
+@media(max-width:640px){.sim .fiscal-toggle .ft-hint{display:none!important}}
+```
+
 ## Créer un nouveau simulateur
 
 1. Créer une nouvelle branche depuis `main` : `git checkout -b simulateur-{nom} main`
@@ -116,10 +179,32 @@ Sprite SVG inline en début de HTML, symboles réutilisés via `<use href="#ico-
 6. Le HTML doit inclure :
    - Le lien Google Fonts (Manrope, Inter, JetBrains Mono)
    - Le lien vers le CSS via CDN jsDelivr
-   - Les overrides Webflow inline critiques (copier depuis un simulateur existant)
+   - Le bloc `<style>` inline avec le reset Webflow complet (copier depuis `simulateur-aen.html`)
    - Le sprite SVG avec les icônes nécessaires
    - Le wrapper `.sim` contenant tout le contenu
    - Le script JS en fin de fichier
+
+### Pièges à éviter
+
+| Piège | Pourquoi | Solution |
+|-------|----------|----------|
+| `style="grid-template-columns:..."` inline | Impossible à overrider en responsive, même avec `!important` en media query | Utiliser les classes `.grid .g2` / `.grid .g3` |
+| Oublier `flex:1!important` dans le `<style>` inline | Le reset global `flex:initial!important` écrase tous les `flex:1` du CSS externe | Déclarer chaque `flex:1` dans le `<style>` inline du HTML |
+| Flex container sans `min-width:0` | Les enfants flex débordent au lieu de se tronquer | Ajouter `min-width:0!important` sur les flex containers qui doivent rétrécir |
+| Texte long dans `.fiscal-toggle` | Le hint + titre + icône débordent sur mobile | `.ft-hint` masqué à 640px, `.ft-left` en `flex-wrap:wrap` |
+| Grilles 3 colonnes sur mobile | Inputs et selects trop petits, illisibles | Media query 640px → `grid-template-columns:1fr!important` |
+
+### Checklist responsive
+
+Avant de publier un nouveau simulateur, vérifier en vue mobile (< 640px) :
+- [ ] Toutes les grilles `.g3` passent en 1 colonne
+- [ ] La grille `.acq-grid` passe en 1 colonne
+- [ ] La grille `.moto-grid` passe en 2 colonnes
+- [ ] Les toggles collapsibles ne débordent pas (hint masqué)
+- [ ] Les inputs/selects font 100% de largeur
+- [ ] Le modal est scrollable et lisible
+- [ ] Les résultats `.detail-grid` passent en 1 colonne
+- [ ] Le CTA Fleet est empilé verticalement
 
 ## Intégration Webflow
 
