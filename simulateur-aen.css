@@ -136,8 +136,8 @@
 /* ── Form ── */
 .sim .grid{display:grid!important;gap:14px!important;margin:0!important;padding:0!important}
 .sim .g2{grid-template-columns:1fr 1fr!important}
-.sim .g3{grid-template-columns:1fr 1fr 1fr!important;gap:14px!important}
-@media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr!important}.sim .g3{gap:8px!important}}
+.sim .g3{grid-template-columns:1fr 1fr 1fr!important}
+@media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr!important}.sim .g3{--g3-gap:8px}}
 .sim .label{
   font-size:14px;font-weight:600;color:var(--text-2);margin-bottom:6px!important;
   display:flex;align-items:center;gap:5px;
