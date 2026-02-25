@@ -69,7 +69,7 @@
 }
 .sim .evc-sm{padding:16px 20px!important}
 .sim .evc-np{padding:0!important}
-@media(max-width:600px){.sim .evc{padding:18px 14px 16px!important}.sim .evc-sm{padding:14px 14px!important}.sim .evc-np{padding:0!important}}
+@media(max-width:600px){.sim .evc{padding:14px 12px 10px!important;margin-bottom:10px!important}.sim .evc-sm{padding:12px 12px 8px!important}.sim .evc-np{padding:0!important}}
 
 .sim .sec-title{
   font-family:'Manrope',sans-serif;font-size:16px;font-weight:700;
@@ -137,7 +137,7 @@
 .sim .grid{display:grid!important;gap:14px!important;margin:0!important;padding:0!important}
 .sim .g2{grid-template-columns:1fr 1fr!important}
 .sim .g3{grid-template-columns:1fr 1fr 1fr!important}
-@media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr!important}}
+@media(max-width:640px){.sim .g2,.sim .g3{grid-template-columns:1fr!important}.sim .g3{--g3-gap:8px}}
 .sim .label{
   font-size:14px;font-weight:600;color:var(--text-2);margin-bottom:6px!important;
   display:flex;align-items:center;gap:5px;
